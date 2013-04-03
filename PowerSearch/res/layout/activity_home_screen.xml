@@ -9,12 +9,35 @@
     tools:context=".HomeScreen" >
 
     <TextView
-        android:id="@+id/textView1"
+
+        android:id="@+id/textView2"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hello_world" />
 
-   <Button
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="184dp"
+        android:layout_toRightOf="@+id/textView2"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView1"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_marginBottom="98dp"
+        android:layout_marginLeft="72dp"
+        android:text="TextView" />
+
+    <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,14 +47,5 @@
         android:layout_marginTop="140dp"
         android:text="Button" />
 
-   <TextView
-       android:id="@+id/textView2"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_below="@+id/button1"
-       android:layout_marginTop="116dp"
-       android:layout_toRightOf="@+id/textView1"
-       android:text="Medium Text"
-       android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>
