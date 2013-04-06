@@ -47,5 +47,10 @@ public class HomeScreen extends Activity {
 		getMenuInflater().inflate(R.menu.home_screen, menu);
 		return true;
 	}
+	
+	public void initiateAudioSearch(View view){
+		Intent intent = new Intent(this, AudioSearch.class);
+		startActivity(intent);
+	}
 
 }

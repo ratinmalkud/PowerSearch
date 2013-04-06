@@ -45,6 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/button_location_search"
         android:layout_alignLeft="@+id/button_text_search"
+        android:onClick="initiateAudioSearch"
         android:text="@string/audio_search" />
 
 </RelativeLayout>
