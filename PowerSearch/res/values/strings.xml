@@ -8,13 +8,11 @@
     <string name="image_search"> Image Search</string>
     <string name="audio_search"> Audio Search</string>
     <string name="text_search"> Text Search</string>
-    
-    
     <string name="title_activity_location_screen1">Location Search</string>
-    
-    
     <string name="title_activity_text_screen1">Text search</string>
-	<string name="enter_text">Enter Text</string>
-	<string name="start_text_search">Search</string>
-	
+    <string name="enter_text">Enter Text</string>
+    <string name="start_text_search">Search</string>
+    <string name="title_activity_audio_search">AudioSearch</string>
+    <string name="title_activity_verify_audio">VerifyAudio</string>
+
 </resources>
