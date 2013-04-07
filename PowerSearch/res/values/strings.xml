@@ -14,7 +14,5 @@
     <string name="start_text_search">Search</string>
     <string name="title_activity_audio_search">AudioSearch</string>
     <string name="title_activity_verify_audio">VerifyAudio</string>
-    <string name="title_activity_image_search">ImageSearch</string>
-    <string name="title_activity_camera_preview">CameraPreview</string>
 
 </resources>

@@ -52,10 +52,5 @@ public class HomeScreen extends Activity {
 		Intent intent = new Intent(this, AudioSearch.class);
 		startActivity(intent);
 	}
-	
-	public void initiateImageSearch(View view){
-		Intent intent = new Intent(this, ImageSearch.class);
-		startActivity(intent);
-	}
 
 }
