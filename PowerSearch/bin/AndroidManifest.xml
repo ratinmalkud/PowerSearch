@@ -58,12 +58,5 @@
             android:label="@string/title_activity_location_search" >
         </activity>
     </application>
-    
-    <supports-screens
- 			android:xlargeScreens="true"
- 			android:largeScreens="true"
- 			android:normalScreens="true"
- 			android:smallScreens="true"
-	/>
 
 </manifest>
