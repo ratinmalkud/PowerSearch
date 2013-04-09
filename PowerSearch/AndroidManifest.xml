@@ -53,6 +53,10 @@
             android:name="com.powerSearch.CameraPreview"
             android:label="@string/title_activity_camera_preview" >
         </activity>
+        <activity
+            android:name="com.powerSearch.LocationSearch"
+            android:label="@string/title_activity_location_search" >
+        </activity>
     </application>
     
     <supports-screens
