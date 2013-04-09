@@ -16,5 +16,6 @@
     <string name="title_activity_verify_audio">VerifyAudio</string>
     <string name="title_activity_image_search">ImageSearch</string>
     <string name="title_activity_camera_preview">CameraPreview</string>
+    <string name="title_activity_location_search">LocationSearch</string>
 
 </resources>

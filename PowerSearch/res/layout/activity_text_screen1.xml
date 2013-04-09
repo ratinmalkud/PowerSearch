@@ -27,4 +27,39 @@
         android:layout_marginTop="33dp"
         android:text="@string/start_text_search" />
 
+
+    <EditText
+        android:id="@+id/editText_textsearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/homeFromTextSearch1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="42dp"
+        android:ems="10"
+        android:hint="@string/enter_text" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/locationSearchTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Text Search"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ImageView
+        android:id="@+id/homeFromTextSearch1"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:clickable="true"
+        android:onClick="goHome"
+        android:src="@drawable/home" />
+
+
 </RelativeLayout>
