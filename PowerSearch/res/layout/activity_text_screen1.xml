@@ -8,25 +8,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Text_screen1" >
 
-    <EditText
-        android:id="@+id/editText_textsearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="43dp"
-        android:ems="10"
-        android:hint="@string/enter_text" />
-
     <Button
         android:id="@+id/button_start_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText_textsearch"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="33dp"
+        android:layout_marginBottom="149dp"
         android:text="@string/start_text_search" />
-
 
     <EditText
         android:id="@+id/editText_textsearch"
@@ -60,6 +49,5 @@
         android:clickable="true"
         android:onClick="goHome"
         android:src="@drawable/home" />
-
 
 </RelativeLayout>

@@ -1,109 +1,47 @@
 package com.powerSearch;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
-import android.R.id;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.hardware.Camera;
-import android.hardware.Camera.PictureCallback;
 import android.util.Log;
 import android.view.Menu;
-import android.view.View;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
-public class ImageSearch extends Activity{
+public class ImageSearch extends Activity {
 	
-	 private Camera mCamera;
-	    private CameraPreview mPreview;
-	    public static final int MEDIA_TYPE_IMAGE = 1;
-	    public static String TAG="ImageSearch";
+	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+	private Uri fileUri;
+	public static final int MEDIA_TYPE_IMAGE = 1;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_image_search);
-		if(checkCameraHardware(this)==true){
-			mCamera = getCameraInstance();
-			mPreview = new CameraPreview(this, mCamera);
-	        FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
-	        preview.addView(mPreview);
-	        Button captureButton = (Button) findViewById(R.id.button_capture);
-	        captureButton.setOnClickListener(
-	                new View.OnClickListener() {
-	                    @Override
-	                    public void onClick(View v) {
-	                        // get an image from the camera
-	                        mCamera.takePicture(null, null, mPicture);
-	                    }
-	                }
-	            );
-	        
-		}
 		
-	}
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.image_search, menu);
-		return true;
+		 // create Intent to take a picture and return control to the calling application
+	    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+	    fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
+	    intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
+
+	    // start the image capture Intent
+	    startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 	}
 	
-	private boolean checkCameraHardware(Context context) {
-	    if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)){
-	        // this device has a camera
-	        return true;
-	    } else {
-	        // no camera on this device
-	        return false;
-	    }
+	
+	
+	private static Uri getOutputMediaFileUri(int type){
+	      return Uri.fromFile(getOutputMediaFile(type));
 	}
 	
-	public static Camera getCameraInstance(){
-	    Camera c = null;
-	    try {
-	        c = Camera.open(); // attempt to get a Camera instance
-	    }
-	    catch (Exception e){
-	        // Camera is not available (in use or does not exist)
-	    }
-	    return c; // returns null if camera is unavailable
-	}
-	
-	private PictureCallback mPicture = new PictureCallback() {
-
-	    public void onPictureTaken(byte[] data, Camera camera) {
-
-	        File pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
-	        if (pictureFile == null){
-	            Log.d(TAG, "Error creating media file, check storage permissions: " );
-	            return;
-	        }
-
-	        try {
-	            FileOutputStream fos = new FileOutputStream(pictureFile);
-	            fos.write(data);
-	            fos.close();
-	        } catch (FileNotFoundException e) {
-	            Log.d(TAG, "File not found: " + e.getMessage());
-	        } catch (IOException e) {
-	            Log.d(TAG, "Error accessing file: " + e.getMessage());
-	        }
-	    }
-	};
 	private static File getOutputMediaFile(int type){
 	    // To be safe, you should check that the SDCard is mounted
 	    // using Environment.getExternalStorageState() before doing this.
@@ -130,21 +68,36 @@ public class ImageSearch extends Activity{
 	    } else {
 	        return null;
 	    }
+
+	    
+	    
+
 	    return mediaFile;
 	}
-	    
-	    @Override
-	    protected void onPause() {
-	        super.onPause();
-	        releaseCamera();              // release the camera immediately on pause event
-	    }
 
-	    private void releaseCamera(){
-	        if (mCamera != null){
-	            mCamera.release();        // release the camera for other applications
-	            mCamera = null;
+	
+	
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	    if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+	        if (resultCode == RESULT_OK) {
+	            // Image captured and saved to fileUri specified in the Intent
+	           // Toast.makeText(this, "Image saved to:\n" +data.getData(), Toast.LENGTH_LONG).show();
+	        } else if (resultCode == RESULT_CANCELED) {
+	            // User cancelled the image capture
+	        } else {
+	            // Image capture failed, advise user
 	        }
 	    }
 	}
 	
-	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.image_search, menu);
+		return true;
+	}
+
+
+}

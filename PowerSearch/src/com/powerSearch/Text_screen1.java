@@ -9,11 +9,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 public class Text_screen1 extends Activity {
 
 	Button start_search;
 	EditText enter_string;
+	ImageView go_home;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,15 +24,22 @@ public class Text_screen1 extends Activity {
 	
 		start_search = (Button) findViewById(R.id.button_start_search);
 		enter_string = (EditText) findViewById(R.id.editText_textsearch);
-
+		go_home =(ImageView) findViewById(R.id.homeFromTextSearch1);
+		
 		start_search.setOnClickListener(new OnClickListener(){
 			public void onClick(View V){
-				System.out.println("IN onclick in location screen 1");
+			//	System.out.println("IN onclick in location screen 1");
 				location_search();
 				finish();
 			}
 	});
 	}
+	
+	public void goHome(View view){
+		Intent intent = new Intent(this, HomeScreen.class);
+		startActivity(intent);
+	}
+	
 	
 	private void location_search(){
 		

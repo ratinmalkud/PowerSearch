@@ -49,7 +49,7 @@ public class HomeScreen extends Activity {
 	}
 	
 	public void initiateAudioSearch(View view){
-		Intent intent = new Intent(this, AudioSearch.class);
+		Intent intent = new Intent(this, SpeechToTextActivity.class);
 		startActivity(intent);
 	}
 	
