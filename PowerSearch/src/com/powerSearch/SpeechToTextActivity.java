@@ -120,8 +120,5 @@ public class SpeechToTextActivity extends Activity {
 		Intent intent = new Intent(this, SpeechToTextActivity.class);
 		startActivity(intent);
 	}
-
-
 }
-
 
