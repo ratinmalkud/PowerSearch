@@ -31,12 +31,12 @@ public class HomeScreen extends Activity {
 		text_search.setOnClickListener(new OnClickListener(){
 			public void onClick(View V){
 			System.out.println("IN onclick");
-			start_text_search();
+			initiateTextSearch();
 			}
 	});
 	}
 
-	private void start_text_search(){
+	private void initiateTextSearch(){
 		Intent i = new Intent(this, Text_screen1.class);
 		startActivity(i);
 		finish();
