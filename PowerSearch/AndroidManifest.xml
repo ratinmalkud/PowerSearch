@@ -15,13 +15,12 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
-      <supports-screens
- 		android:xlargeScreens="true"
- 		android:largeScreens="true"
- 		android:normalScreens="true"
- 		android:smallScreens="true"
-	/>
-    
+    <supports-screens
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -64,7 +63,10 @@
             android:name="com.powerSearch.LocationSearch"
             android:label="@string/title_activity_location_search" >
         </activity>
+        <activity
+            android:name="com.powerSearch.SpeechToTextActivity"
+            android:label="@string/title_activity_speech_to_text" >
+        </activity>
     </application>
 
-  
 </manifest>
