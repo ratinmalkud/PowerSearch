@@ -29,7 +29,7 @@ public class Text_screen1 extends Activity {
 		start_search.setOnClickListener(new OnClickListener(){
 			public void onClick(View V){
 			//	System.out.println("IN onclick in location screen 1");
-				location_search();
+				text_search();
 				finish();
 			}
 	});
@@ -41,7 +41,7 @@ public class Text_screen1 extends Activity {
 	}
 	
 	
-	private void location_search(){
+	private void text_search(){
 		
 		String search_input = enter_string.getText().toString() ;
 		Intent search = new Intent(Intent.ACTION_WEB_SEARCH);  

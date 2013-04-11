@@ -16,6 +16,20 @@
         android:layout_marginTop="10dp"
         android:contentDescription="speak"
         android:src="@android:drawable/ic_btn_speak_now" />
+
+    <Button
+        android:id="@+id/btnRerecord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Record Again"
+        android:visibility = "invisible" />
+
+    <Button
+        android:id="@+id/btnSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        android:visibility="invisible" />
  
     <TextView
         android:id="@+id/txtText"
