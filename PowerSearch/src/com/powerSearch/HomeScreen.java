@@ -47,12 +47,12 @@ public class HomeScreen extends Activity {
 		startActivity(intent);
 	}
 
-	private void initiateTextSearch(View V){
+	public void initiateTextSearch(View V){
 		Intent i = new Intent(this, Text_screen1.class);
 		startActivity(i);
 		}
 	
-	private void initiateLocationSearch(View V){
+	public void findMe(View view){
 		Intent intent = new Intent(this, LocationSearch.class);
 		startActivity(intent);
 	}

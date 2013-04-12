@@ -8,8 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".HomeScreen" >
 
-    
-
     <Button
         android:id="@+id/button_location_search"
         android:layout_width="wrap_content"
@@ -18,7 +16,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="169dp"
         android:layout_marginLeft="18dp"
-        android:onClick="initiateLocationSearch"
+        android:onClick="findMe"
         android:text="@string/location_search" />
 
     <Button
