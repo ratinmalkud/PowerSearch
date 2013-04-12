@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 
 public class HomeScreen extends Activity {
@@ -27,9 +28,19 @@ public class HomeScreen extends Activity {
 		audio_search = (Button) findViewById(R.id.button_audio_search);
 		text_search = (Button) findViewById(R.id.button_text_search);
 
+		text_search.setOnClickListener(new OnClickListener(){
+			public void onClick(View V){
+			System.out.println("IN onclick");
+			start_text_search();
+			}
+	});
 	}
 
-	
+	private void start_text_search(){
+		Intent i = new Intent(this, Text_screen1.class);
+		startActivity(i);
+		finish();
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -38,7 +49,7 @@ public class HomeScreen extends Activity {
 	}
 	
 	public void initiateAudioSearch(View view){
-		Intent intent = new Intent(this, SpeechToTextActivity.class);
+		Intent intent = new Intent(this, AudioSearch.class);
 		startActivity(intent);
 	}
 	
@@ -46,14 +57,10 @@ public class HomeScreen extends Activity {
 		Intent intent = new Intent(this, ImageSearch.class);
 		startActivity(intent);
 	}
-
-	private void initiateTextSearch(View V){
-		Intent i = new Intent(this, Text_screen1.class);
-		startActivity(i);
-		}
 	
-	private void initiateLocationSearch(View V){
+	public void findMe(View view){
 		Intent intent = new Intent(this, LocationSearch.class);
 		startActivity(intent);
 	}
+
 }
