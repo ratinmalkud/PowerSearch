@@ -27,15 +27,7 @@ public class AudioSearch extends Activity {
 	ImageView home;
 	
 	String saveAt = "/sdcard/toSearch.3gpp";
-	/*
-	public static String getToSearch() {
-		return toSearch;
-	}
-
-	public void setToSearch(String toSearch) {
-		AudioSearch.toSearch = toSearch;
-	}
-	 */
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -59,38 +51,7 @@ public class AudioSearch extends Activity {
 		Intent intent = new Intent(this, HomeScreen.class);
 		startActivity(intent);
 	}
-	/*
-	public void startRecording(View view){
-		
-		if(recorder != null){
-			recorder.release();
-		}
-		
-		stopButton.setVisibility(View.VISIBLE);
-		//startButton.setClickable(false);
-		
-		File outFile = new File(saveAt);
-		if(outFile.exists())
-		{
-			outFile.delete();
-		}
-		recorder = new MediaRecorder();
-		recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-		recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-		recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-		recorder.setOutputFile(saveAt);
-		try {
-			recorder.prepare();
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		recorder.start();
-	}
-	*/
+	
 	
 	public void startRecording(View view){
 		Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -102,32 +63,10 @@ public class AudioSearch extends Activity {
 		 super.onActivityResult(requestCode,resultCode,data);
 		 
 		 if(resultCode == RESULT_OK){
-			 switch(requestCode){
-			 case REQUEST_SPEECH:{
-				 toSearch = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-				 
-				 Intent intent = new Intent(this, VerifyAudio.class);
-				 intent.putExtra(searchPhrase, toSearch.get(0));
-				 startActivity(intent);
-			 }
-			 }
+			 toSearch = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+			  Intent intent = new Intent(this, VerifyAudio.class);
+			 intent.putExtra(searchPhrase, toSearch.get(0));
+			 startActivity(intent);
 		 }
 	 }
-	 
-	public void stopRecording(View view){
-		//startButton.setClickable(true);
-		
-		if (recorder != null){ 
-			recorder.stop();
-		}
-		
-		if (recorder != null) 
-		{
-			recorder.release();
-		}
-		
-		Intent intent = new Intent(this, VerifyAudio.class);
-		startActivity(intent);
-	}
-
 }
