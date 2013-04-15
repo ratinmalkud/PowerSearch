@@ -20,7 +20,7 @@ public class AudioSearch extends Activity {
 	MediaPlayer player;
 	final int REQUEST_SPEECH = 13;
 	public final static String searchPhrase = "This is the search phrase";
-	String toSearch;
+	ArrayList < String > toSearch;
 	
 	Button startButton;
 	Button stopButton;
@@ -102,15 +102,15 @@ public class AudioSearch extends Activity {
 		 super.onActivityResult(requestCode,resultCode,data);
 		 
 		 if(resultCode == RESULT_OK){
-		//	 switch(requestCode){
-		//	 case REQUEST_SPEECH:{
-				 toSearch = data.getStringExtra(RecognizerIntent.EXTRA_RESULTS);
+			 switch(requestCode){
+			 case REQUEST_SPEECH:{
+				 toSearch = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 				 
 				 Intent intent = new Intent(this, VerifyAudio.class);
-				 intent.putExtra(searchPhrase, toSearch);
+				 intent.putExtra(searchPhrase, toSearch.get(0));
 				 startActivity(intent);
-		//	 }
-		//	 }
+			 }
+			 }
 		 }
 	 }
 	 

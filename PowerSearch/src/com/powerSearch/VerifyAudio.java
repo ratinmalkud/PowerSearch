@@ -12,12 +12,13 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Toast;
 
 public class VerifyAudio extends Activity implements OnInitListener{
 	MediaPlayer player;
 	String savedAt = "/sdcard/toSearch.3gpp";
 	String toSearch;
-	final int CHECK_CODE = 13;
+	final static int CHECK_CODE = 1;
 	TextToSpeech myTTS;
 	
 	@Override
@@ -102,6 +103,9 @@ public class VerifyAudio extends Activity implements OnInitListener{
 	}
 	
 	public void playRecording(View view){
+		Toast toast = Toast.makeText(getBaseContext(), toSearch, Toast.LENGTH_SHORT);
+		toast.show();
+		
 		myTTS.setLanguage(Locale.UK);
 		myTTS.speak(toSearch, TextToSpeech.QUEUE_FLUSH, null);
 	}
