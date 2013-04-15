@@ -2,12 +2,14 @@ package com.powerSearch;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.speech.RecognizerIntent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -16,13 +18,24 @@ import android.widget.ImageView;
 public class AudioSearch extends Activity {
 	MediaRecorder recorder;
 	MediaPlayer player;
+	final int REQUEST_SPEECH = 13;
+	public final static String searchPhrase = "This is the search phrase";
+	String toSearch;
 	
 	Button startButton;
 	Button stopButton;
 	ImageView home;
 	
 	String saveAt = "/sdcard/toSearch.3gpp";
-	
+	/*
+	public static String getToSearch() {
+		return toSearch;
+	}
+
+	public void setToSearch(String toSearch) {
+		AudioSearch.toSearch = toSearch;
+	}
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -46,7 +59,7 @@ public class AudioSearch extends Activity {
 		Intent intent = new Intent(this, HomeScreen.class);
 		startActivity(intent);
 	}
-	
+	/*
 	public void startRecording(View view){
 		
 		if(recorder != null){
@@ -77,7 +90,30 @@ public class AudioSearch extends Activity {
 		}
 		recorder.start();
 	}
+	*/
 	
+	public void startRecording(View view){
+		Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+		intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, "en-UK");
+		startActivityForResult(intent, REQUEST_SPEECH);
+	}
+	
+	 protected void onActivityResult(int requestCode, int resultCode, Intent data){
+		 super.onActivityResult(requestCode,resultCode,data);
+		 
+		 if(resultCode == RESULT_OK){
+		//	 switch(requestCode){
+		//	 case REQUEST_SPEECH:{
+				 toSearch = data.getStringExtra(RecognizerIntent.EXTRA_RESULTS);
+				 
+				 Intent intent = new Intent(this, VerifyAudio.class);
+				 intent.putExtra(searchPhrase, toSearch);
+				 startActivity(intent);
+		//	 }
+		//	 }
+		 }
+	 }
+	 
 	public void stopRecording(View view){
 		//startButton.setClickable(true);
 		
