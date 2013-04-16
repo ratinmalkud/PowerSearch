@@ -1,12 +1,7 @@
-package audioSearch;
+package com.powerSearch;
 
 import java.io.IOException;
 import java.util.Locale;
-
-import com.powerSearch.HomeScreen;
-import com.powerSearch.R;
-import com.powerSearch.R.layout;
-import com.powerSearch.R.menu;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -52,42 +47,7 @@ public class VerifyAudio extends Activity implements OnInitListener{
 		startActivity(intent);
 	}
 	
-	/*
-	public void playRecording(View view){
-		if (player != null) 
-		{
-			try {
-				player.release();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		player = new MediaPlayer();
-		try {
-			player.setDataSource(savedAt);
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			player.prepare();
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		player.start();
-	}
-	*/
-	
+		
 	/*
 	 * http://android-developers.blogspot.com/2009/09/introduction-to-text-to-speech-in.html
 	 */

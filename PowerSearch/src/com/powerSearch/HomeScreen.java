@@ -1,14 +1,11 @@
 package com.powerSearch;
 
-import textSearch.Text_screen1;
-import imageSearch.ImageSearch;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
-import audioSearch.AudioSearch;
 
 public class HomeScreen extends Activity {
 

@@ -1,12 +1,8 @@
-package imageSearch;
+package com.powerSearch;
 
 import java.io.File;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-
-import com.powerSearch.R;
-import com.powerSearch.R.layout;
-import com.powerSearch.R.menu;
 
 import android.net.Uri;
 import android.os.Bundle;

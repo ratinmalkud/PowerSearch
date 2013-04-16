@@ -1,14 +1,8 @@
-package audioSearch;
+package com.powerSearch;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import com.powerSearch.HomeScreen;
-import com.powerSearch.R;
-import com.powerSearch.R.id;
-import com.powerSearch.R.layout;
-import com.powerSearch.R.menu;
 
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
@@ -33,15 +27,7 @@ public class AudioSearch extends Activity {
 	ImageView home;
 	
 	String saveAt = "/sdcard/toSearch.3gpp";
-	/*
-	public static String getToSearch() {
-		return toSearch;
-	}
-
-	public void setToSearch(String toSearch) {
-		AudioSearch.toSearch = toSearch;
-	}
-	 */
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -65,38 +51,7 @@ public class AudioSearch extends Activity {
 		Intent intent = new Intent(this, HomeScreen.class);
 		startActivity(intent);
 	}
-	/*
-	public void startRecording(View view){
-		
-		if(recorder != null){
-			recorder.release();
-		}
-		
-		stopButton.setVisibility(View.VISIBLE);
-		//startButton.setClickable(false);
-		
-		File outFile = new File(saveAt);
-		if(outFile.exists())
-		{
-			outFile.delete();
-		}
-		recorder = new MediaRecorder();
-		recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-		recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-		recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-		recorder.setOutputFile(saveAt);
-		try {
-			recorder.prepare();
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		recorder.start();
-	}
-	*/
+	
 	
 	public void startRecording(View view){
 		Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
