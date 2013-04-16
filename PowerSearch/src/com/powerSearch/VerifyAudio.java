@@ -28,7 +28,6 @@ public class VerifyAudio extends Activity implements OnInitListener{
 		
 		Intent intent = getIntent();
 		toSearch = intent.getStringExtra(AudioSearch.searchPhrase);
-	//	toSearch = AudioSearch.getToSearch();
 		
 		Intent checkIntent = new Intent();
 		checkIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
@@ -47,42 +46,7 @@ public class VerifyAudio extends Activity implements OnInitListener{
 		startActivity(intent);
 	}
 	
-	/*
-	public void playRecording(View view){
-		if (player != null) 
-		{
-			try {
-				player.release();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		player = new MediaPlayer();
-		try {
-			player.setDataSource(savedAt);
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			player.prepare();
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		player.start();
-	}
-	*/
-	
+		
 	/*
 	 * http://android-developers.blogspot.com/2009/09/introduction-to-text-to-speech-in.html
 	 */
