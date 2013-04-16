@@ -25,7 +25,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="42dp"
         android:ems="10"
-        android:hint="@string/enter_text" >
+        android:hint="@string/enter_text" 
+        android:imeOptions = "actionSearch">
 
         <requestFocus />
     </EditText>

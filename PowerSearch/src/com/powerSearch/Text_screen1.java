@@ -4,12 +4,16 @@ import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class Text_screen1 extends Activity {
 
@@ -26,6 +30,9 @@ public class Text_screen1 extends Activity {
 		enter_string = (EditText) findViewById(R.id.editText_textsearch);
 		go_home =(ImageView) findViewById(R.id.homeFromTextSearch1);
 		
+		enter_string.setFocusableInTouchMode(true);
+		enter_string.requestFocus();
+		
 		start_search.setOnClickListener(new OnClickListener(){
 			public void onClick(View V){
 			//	System.out.println("IN onclick in location screen 1");
@@ -33,6 +40,21 @@ public class Text_screen1 extends Activity {
 				finish();
 			}
 	});
+		
+		enter_string.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+		enter_string.setOnEditorActionListener(new TextView.OnEditorActionListener(){
+			public boolean onEditorAction(	TextView V,int actionid, KeyEvent event)
+			{
+				System.out.println("In check for enter");
+				if(actionid == EditorInfo.IME_ACTION_SEARCH){
+					text_search();
+					Toast.makeText(getApplicationContext(), enter_string.getText().toString(), Toast.LENGTH_SHORT).show();
+					return true;
+					}
+				
+				return false;
+			}
+		});
 	}
 	
 	public void goHome(View view){
