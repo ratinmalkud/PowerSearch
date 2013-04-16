@@ -1,8 +1,14 @@
-package com.powerSearch;
+package audioSearch;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import com.powerSearch.HomeScreen;
+import com.powerSearch.R;
+import com.powerSearch.R.id;
+import com.powerSearch.R.layout;
+import com.powerSearch.R.menu;
 
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
