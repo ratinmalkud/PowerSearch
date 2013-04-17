@@ -25,7 +25,7 @@ public class AudioSearch extends Activity {
 	Button startButton;
 	Button stopButton;
 	ImageView home;
-	
+	//
 	String saveAt = "/sdcard/toSearch.3gpp";
 	
 	@Override
