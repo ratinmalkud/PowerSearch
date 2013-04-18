@@ -49,8 +49,10 @@
         <activity
             android:name="com.powerSearch.Location_screen1"
             android:label="@string/title_activity_location_screen1" >
+            
         </activity>
-        <activity
+        
+       <activity
             android:name="com.powerSearch.Text_screen1"
             android:label="@string/title_activity_text_screen1" >
         </activity>
