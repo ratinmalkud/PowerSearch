@@ -143,37 +143,37 @@ containing a value of this type.
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int action_settings=0x7f04001e;
-        public static final int audioDisplay2=0x7f040019;
-        public static final int audioSearchButton=0x7f04001d;
-        public static final int audioSearchDisplay=0x7f040005;
-        public static final int btnRerecord=0x7f040012;
-        public static final int btnSearch=0x7f040013;
-        public static final int btnSpeak=0x7f040011;
-        public static final int button_audio_search=0x7f04000e;
-        public static final int button_capture=0x7f04000a;
-        public static final int button_image_search=0x7f04000c;
-        public static final int button_location_search=0x7f04000b;
-        public static final int button_start_search=0x7f040015;
-        public static final int button_text_search=0x7f04000d;
-        public static final int camera_preview=0x7f040009;
-        public static final int editText_textsearch=0x7f040016;
-        public static final int homeFromAudio1=0x7f040006;
-        public static final int homeFromTextSearch1=0x7f040017;
-        public static final int hybrid=0x7f040004;
-        public static final int imageView1=0x7f04001a;
-        public static final int locationSearchTV=0x7f040018;
-        public static final int map=0x7f04000f;
-        public static final int none=0x7f040000;
-        public static final int normal=0x7f040001;
-        public static final int playRecording=0x7f04001b;
-        public static final int recordAgainButton=0x7f04001c;
-        public static final int satellite=0x7f040002;
-        public static final int startRecordingButton=0x7f040007;
-        public static final int stopRecordingButton=0x7f040008;
-        public static final int terrain=0x7f040003;
-        public static final int textView1=0x7f040010;
-        public static final int txtText=0x7f040014;
+        public static final int action_settings=0x7f05001e;
+        public static final int audioDisplay2=0x7f050019;
+        public static final int audioSearchButton=0x7f05001d;
+        public static final int audioSearchDisplay=0x7f050005;
+        public static final int btnRerecord=0x7f050012;
+        public static final int btnSearch=0x7f050013;
+        public static final int btnSpeak=0x7f050011;
+        public static final int button_audio_search=0x7f05000e;
+        public static final int button_capture=0x7f05000a;
+        public static final int button_image_search=0x7f05000c;
+        public static final int button_location_search=0x7f05000b;
+        public static final int button_start_search=0x7f050015;
+        public static final int button_text_search=0x7f05000d;
+        public static final int camera_preview=0x7f050009;
+        public static final int editText_textsearch=0x7f050016;
+        public static final int homeFromAudio1=0x7f050006;
+        public static final int homeFromTextSearch1=0x7f050017;
+        public static final int hybrid=0x7f050004;
+        public static final int imageView1=0x7f05001a;
+        public static final int locationSearchTV=0x7f050018;
+        public static final int map=0x7f05000f;
+        public static final int none=0x7f050000;
+        public static final int normal=0x7f050001;
+        public static final int playRecording=0x7f05001b;
+        public static final int recordAgainButton=0x7f05001c;
+        public static final int satellite=0x7f050002;
+        public static final int startRecordingButton=0x7f050007;
+        public static final int stopRecordingButton=0x7f050008;
+        public static final int terrain=0x7f050003;
+        public static final int textView1=0x7f050010;
+        public static final int txtText=0x7f050014;
     }
     public static final class layout {
         public static final int activity_audio_search=0x7f030000;
@@ -184,6 +184,7 @@ containing a value of this type.
         public static final int activity_speech_to_text=0x7f030005;
         public static final int activity_text_screen1=0x7f030006;
         public static final int activity_verify_audio=0x7f030007;
+        public static final int main=0x7f030008;
     }
     public static final class menu {
         public static final int audio_search=0x7f080000;
@@ -197,85 +198,86 @@ containing a value of this type.
         public static final int verify_audio=0x7f080008;
     }
     public static final class string {
-        public static final int action_settings=0x7f050012;
-        public static final int app_name=0x7f050011;
-        public static final int audio_search=0x7f050016;
+        public static final int action_settings=0x7f040013;
+        public static final int app_name=0x7f040001;
+        public static final int audio_search=0x7f040017;
         /**   Title for notification shown when GooglePlayServices is unavailable [CHAR LIMIT=70] 
          */
-        public static final int auth_client_availability_notification_title=0x7f05000e;
+        public static final int auth_client_availability_notification_title=0x7f040010;
         /**   Title for notification shown when GooglePlayServices is unavailable [CHAR LIMIT=42] 
          */
-        public static final int auth_client_play_services_err_notification_msg=0x7f05000f;
+        public static final int auth_client_play_services_err_notification_msg=0x7f040011;
         /**   Requested by string saying which app requested the notification. [CHAR LIMIT=42] 
          */
-        public static final int auth_client_requested_by_msg=0x7f050010;
+        public static final int auth_client_requested_by_msg=0x7f040012;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 
          */
-        public static final int common_google_play_services_enable_button=0x7f050006;
+        public static final int common_google_play_services_enable_button=0x7f040008;
         /**  Message in confirmation dialog informing user they need to enable
         Google Play services in application settings [CHAR LIMIT=NONE] 
          */
-        public static final int common_google_play_services_enable_text=0x7f050005;
+        public static final int common_google_play_services_enable_text=0x7f040007;
         /**  Title of confirmation dialog informing user they need to enable
         Google Play services in application settings [CHAR LIMIT=40] 
          */
-        public static final int common_google_play_services_enable_title=0x7f050004;
+        public static final int common_google_play_services_enable_title=0x7f040006;
         /**  Button in confirmation dialog for installing Google Play services [CHAR LIMIT=40] 
          */
-        public static final int common_google_play_services_install_button=0x7f050003;
+        public static final int common_google_play_services_install_button=0x7f040005;
         /**  (For phones) Message in confirmation dialog informing user that
         they need to install Google Play services (from Play Store) [CHAR LIMIT=NONE] 
          */
-        public static final int common_google_play_services_install_text_phone=0x7f050001;
+        public static final int common_google_play_services_install_text_phone=0x7f040003;
         /**  (For tablets) Message in confirmation dialog informing user that
         they need to install Google Play services (from Play Store) [CHAR LIMIT=NONE] 
          */
-        public static final int common_google_play_services_install_text_tablet=0x7f050002;
+        public static final int common_google_play_services_install_text_tablet=0x7f040004;
         /**  Title of confirmation dialog informing user that they need to install
         Google Play services (from Play Store) [CHAR LIMIT=40] 
          */
-        public static final int common_google_play_services_install_title=0x7f050000;
+        public static final int common_google_play_services_install_title=0x7f040002;
         /**  Message in confirmation dialog informing user there is an unknown issue in Google Play
         services [CHAR LIMIT=NONE] 
          */
-        public static final int common_google_play_services_unknown_issue=0x7f050009;
+        public static final int common_google_play_services_unknown_issue=0x7f04000b;
         /**  Message in confirmation dialog informing user that Google Play services is not supported on their device [CHAR LIMIT=NONE] 
          */
-        public static final int common_google_play_services_unsupported_text=0x7f05000b;
+        public static final int common_google_play_services_unsupported_text=0x7f04000d;
         /**  Title of confirmation dialog informing user that Google Play services is not supported on their device [CHAR LIMIT=40] 
          */
-        public static final int common_google_play_services_unsupported_title=0x7f05000a;
+        public static final int common_google_play_services_unsupported_title=0x7f04000c;
         /**  Button in confirmation dialog for updating Google Play services [CHAR LIMIT=40] 
          */
-        public static final int common_google_play_services_update_button=0x7f05000c;
+        public static final int common_google_play_services_update_button=0x7f04000e;
         /**  Message in confirmation dialog informing user that they need to update
         Google Play services (from Play Store) [CHAR LIMIT=NONE] 
          */
-        public static final int common_google_play_services_update_text=0x7f050008;
+        public static final int common_google_play_services_update_text=0x7f04000a;
         /**  Title of confirmation dialog informing user that they need to update
         Google Play services (from Play Store) [CHAR LIMIT=40] 
          */
-        public static final int common_google_play_services_update_title=0x7f050007;
+        public static final int common_google_play_services_update_title=0x7f040009;
         /**  Long form sign-in button text. This is the placeholder text, used if we can't
         find the service-side assets. [CHAR LIMIT=25] 
          */
-        public static final int common_signin_button_text_long=0x7f05000d;
-        public static final int enter_text=0x7f05001a;
-        public static final int hello_world=0x7f050013;
-        public static final int image_search=0x7f050015;
-        public static final int location_search=0x7f050014;
-        public static final int start_text_search=0x7f05001b;
-        public static final int text_search=0x7f050017;
-        public static final int title_activity_audio_search=0x7f05001c;
-        public static final int title_activity_camera_preview=0x7f05001f;
-        public static final int title_activity_image_search=0x7f05001e;
-        public static final int title_activity_location_screen1=0x7f050018;
-        public static final int title_activity_location_search=0x7f050020;
-        public static final int title_activity_speech_to_text=0x7f050021;
-        public static final int title_activity_text_screen1=0x7f050019;
-        public static final int title_activity_verify_audio=0x7f05001d;
+        public static final int common_signin_button_text_long=0x7f04000f;
+        public static final int enter_text=0x7f04001b;
+        public static final int hello=0x7f040000;
+        public static final int hello_world=0x7f040014;
+        public static final int image_search=0x7f040016;
+        public static final int location_search=0x7f040015;
+        public static final int start_text_search=0x7f04001c;
+        public static final int text_search=0x7f040018;
+        public static final int title_activity_audio_search=0x7f04001d;
+        public static final int title_activity_camera_preview=0x7f040020;
+        public static final int title_activity_image_search=0x7f04001f;
+        public static final int title_activity_location_screen1=0x7f040019;
+        public static final int title_activity_location_search=0x7f040021;
+        public static final int title_activity_speech_to_text=0x7f040022;
+        public static final int title_activity_text_screen1=0x7f04001a;
+        public static final int title_activity_verify_audio=0x7f04001e;
     }
     public static final class style {
         /** 
