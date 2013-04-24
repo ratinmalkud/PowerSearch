@@ -17,7 +17,6 @@ public class HomeScreen extends Activity {
 	Button text_search;
 	Button audio_search;
 	
-	String text_input;
 	
 	
 	@Override
