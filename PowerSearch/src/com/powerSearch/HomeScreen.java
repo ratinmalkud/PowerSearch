@@ -1,14 +1,17 @@
 package com.powerSearch;
 
-import textSearch.Text_screen1;
-import imageSearch.ImageSearch;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
-import audioSearch.AudioSearch;
+import android.widget.Toast;
 
 public class HomeScreen extends Activity {
 
@@ -17,7 +20,9 @@ public class HomeScreen extends Activity {
 	Button text_search;
 	Button audio_search;
 	
-	
+	double lat, lng;
+	LocationManager locMgr;
+	LocationListener locListener;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +60,58 @@ public class HomeScreen extends Activity {
 		}
 	
 	public void findMe(View view){
+		
+		
+		
+		locMgr = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+		
+		locListener = new LocationListener()
+		{
+			public void onLocationChanged(Location location)
+			{
+			if (location != null)
+			{
+				lat = location.getLatitude();
+				lng = location.getLongitude();
+				
+				startLocation();
+			}
+			}
+
+			@Override
+			public void onProviderDisabled(String provider) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onProviderEnabled(String provider) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onStatusChanged(String provider, int status,
+					Bundle extras) {
+				// TODO Auto-generated method stub
+				
+			}};
+			
+			locMgr.requestLocationUpdates(
+					LocationManager.NETWORK_PROVIDER,
+					0, // minTime in ms
+					0, // minDistance in meters
+					locListener);
+			
+		}
+	
+	public void startLocation(){
+		locMgr.removeUpdates(locListener);
+	
 		Intent intent = new Intent(this, LocationSearch.class);
+		intent.putExtra("Lat", lat);
+		intent.putExtra("Lng", lng);
 		startActivity(intent);
 	}
+	
 }

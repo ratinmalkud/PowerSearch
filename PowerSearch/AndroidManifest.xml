@@ -49,21 +49,23 @@
         <activity
             android:name="com.powerSearch.Location_screen1"
             android:label="@string/title_activity_location_screen1" >
+            
         </activity>
-        <activity
-            android:name="textSearch.Text_screen1"
+        
+       <activity
+            android:name="com.powerSearch.Text_screen1"
             android:label="@string/title_activity_text_screen1" >
         </activity>
         <activity
-            android:name="audioSearch.AudioSearch"
+            android:name="com.powerSearch.AudioSearch"
             android:label="@string/title_activity_audio_search" >
         </activity>
         <activity
-            android:name="audioSearch.VerifyAudio"
+            android:name="com.powerSearch.VerifyAudio"
             android:label="@string/title_activity_verify_audio" >
         </activity>
         <activity
-            android:name="imageSearch.ImageSearch"
+            android:name="com.powerSearch.ImageSearch"
             android:label="@string/title_activity_image_search" >
         </activity>
         <activity

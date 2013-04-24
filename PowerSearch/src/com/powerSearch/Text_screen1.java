@@ -1,10 +1,4 @@
-package textSearch;
-
-import com.powerSearch.HomeScreen;
-import com.powerSearch.R;
-import com.powerSearch.R.id;
-import com.powerSearch.R.layout;
-import com.powerSearch.R.menu;
+package com.powerSearch;
 
 import android.app.Activity;
 import android.app.SearchManager;
