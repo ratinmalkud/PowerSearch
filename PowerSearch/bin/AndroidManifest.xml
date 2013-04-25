@@ -7,23 +7,27 @@
     <uses-sdk
         android:minSdkVersion="12"
         android:targetSdkVersion="17" />
-	
-    <permission android:name="com.powerSearch.permission.MAPS_RECEIVE"
-        		android:protectionLevel="signature"/>
-	<uses-permission android:name="com.powerSearch.permission.MAPS_RECEIVE"/>
+
+    <permission
+        android:name="com.powerSearch.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.powerSearch.permission.MAPS_RECEIVE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-  	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />  
-  	<uses-permission android:name="android.permission.INTERNET" />
-  	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-feature android:glEsVersion="0x00020000"
-        		  android:required="true"/>
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
 
     <supports-screens
         android:largeScreens="true"
@@ -49,10 +53,8 @@
         <activity
             android:name="com.powerSearch.Location_screen1"
             android:label="@string/title_activity_location_screen1" >
-            
         </activity>
-        
-       <activity
+        <activity
             android:name="com.powerSearch.Text_screen1"
             android:label="@string/title_activity_text_screen1" >
         </activity>
@@ -80,9 +82,23 @@
             android:name="com.powerSearch.SpeechToTextActivity"
             android:label="@string/title_activity_speech_to_text" >
         </activity>
-         <meta-data
-    	android:name="com.google.android.maps.v2.API_KEY"
-    	android:value="AIzaSyD0UaHW2DngLfe-7NBG7gJlVjHMZxeim7k"/>
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyD0UaHW2DngLfe-7NBG7gJlVjHMZxeim7k" />
+
+        <activity
+            android:name="com.powerSearch.ToTest"
+            android:label="@string/title_activity_to_test" >
+        </activity>
+        <activity
+            android:name="com.powerSearch.ImageSearchRatinMalkud"
+            android:label="@string/title_activity_image_search_ratin_malkud" >
+        </activity>
+        <activity
+            android:name="com.powerSearch.HistoryActivity"
+            android:label="@string/title_activity_history" >
+        </activity>
     </application>
 
 </manifest>

@@ -18,6 +18,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.ImageFormat;
 import android.graphics.YuvImage;
+import android.hardware.Camera;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
@@ -39,8 +40,12 @@ public class ImageSearch extends Activity {
 	/**
 	 * Settings.
 	 */
+	
 	IQE iqe;
 	YuvImage yuv;
+	Camera cam;
+	byte [] frames;
+	
 	// Activates the local search.
 	static final boolean SEARCH_OBJECT_LOCAL = false;
 	
@@ -69,7 +74,9 @@ public class ImageSearch extends Activity {
 	static final boolean DEBUG = true;
 	
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+	
 	private Uri fileUri;
+	
 	public static final int MEDIA_TYPE_IMAGE = 1;
 
 
@@ -138,8 +145,14 @@ public class ImageSearch extends Activity {
 	           // Toast.makeText(this, "Image saved to:\n" +data.getData(), Toast.LENGTH_LONG).show();
 	        	try {
 					Bitmap img = Media.getBitmap(getContentResolver(), fileUri );
-					yuv = new YuvImage(img.getNinePatchChunk(), ImageFormat.NV21, img.getWidth(), img.getHeight(), null);
-					processImageSnap(yuv);
+					frames = new byte[((img.getWidth() * img.getHeight() * 12) / 8)];
+					yuv = new YuvImage(frames, ImageFormat.NV21, img.getWidth(), img.getHeight(), null);
+					Intent intent = new Intent(this, ToTest.class);
+					intent.putExtra("add", fileUri);
+					startActivity(intent);
+					//	processImageSnap(yuv);
+					
+					
 					
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block

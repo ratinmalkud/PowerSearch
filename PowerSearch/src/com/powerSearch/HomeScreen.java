@@ -51,7 +51,7 @@ public class HomeScreen extends Activity {
 	}
 	
 	public void initiateImageSearch(View view){
-		Intent intent = new Intent(this, ImageSearch.class);
+		Intent intent = new Intent(this, ImageSearchRatinMalkud.class);
 		startActivity(intent);
 	}
 
