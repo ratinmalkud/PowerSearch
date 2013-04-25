@@ -18,5 +18,8 @@
     <string name="title_activity_camera_preview">CameraPreview</string>
     <string name="title_activity_location_search">LocationSearch</string>
     <string name="title_activity_speech_to_text">SpeechToTextActivity</string>
+    <string name="title_activity_to_test">ToTest</string>
+    <string name="title_activity_image_search_ratin_malkud">ImageSearchRatinMalkud</string>
+    <string name="title_activity_history">HistoryActivity</string>
 
 </resources>
