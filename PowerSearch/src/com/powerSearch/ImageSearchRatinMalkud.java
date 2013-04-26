@@ -42,6 +42,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ImageSearchRatinMalkud extends Activity {
@@ -58,7 +59,7 @@ public class ImageSearchRatinMalkud extends Activity {
 	int height;
 	int bpp = 12;
 	String result;
-		
+	TextView searching;	
 	/*********************************************************************************************/
 	/**
 	 * Account settings. You can obtain the required keys after you've signed up
@@ -118,8 +119,8 @@ public class ImageSearchRatinMalkud extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_image_search_ratin_malkud);
 		
-		img = (ImageView)findViewById(R.id.display);
-		img.setVisibility(View.INVISIBLE);
+		searching = (TextView)findViewById(R.id.searching);
+		searching.setVisibility(View.VISIBLE);
 		
 		iqe = new IQE(this, SEARCH_OBJECT_REMOTE,SEARCH_OBJECT_LOCAL,
 				SEARCH_OBJECT_BARCODE, onResultCallback, KEY, SECRET);
@@ -256,6 +257,7 @@ public class ImageSearchRatinMalkud extends Activity {
 			result = oNm;
 			
 			showResult();
+		//	goHome();
 		//	Toast.makeText(getBaseContext(),oNm,Toast.LENGTH_LONG).show();
 		}
 		
@@ -300,6 +302,7 @@ public class ImageSearchRatinMalkud extends Activity {
 		super.onResume();
 		activityRunning.set(true);
 		iqe.resume();
+		//goHome();
 	}
 	
 	@Override
@@ -311,9 +314,16 @@ public class ImageSearchRatinMalkud extends Activity {
 	}
 	
 	@Override
+	protected void onRestart(){
+		super.onRestart();
+	//	goHome();
+	}
+
+	@Override
 	public void onDestroy() {
 		if (DEBUG) Log.d(TAG,"onDestroy");
 		iqe.destroy();
+		goHome();
 		super.onDestroy();
 	}
 	
@@ -323,6 +333,8 @@ public class ImageSearchRatinMalkud extends Activity {
 	}
 	
 	public void showResult(){
+		searching.setVisibility(View.INVISIBLE);
+		
 		AlertDialog.Builder builder = new AlertDialog.Builder(ImageSearchRatinMalkud.this);
 		builder.setCancelable(false);
 		builder.setTitle("Image Recognized as...");
@@ -335,7 +347,9 @@ public class ImageSearchRatinMalkud extends Activity {
 			//perform text search here
 				Intent search = new Intent(Intent.ACTION_WEB_SEARCH);  
 				search.putExtra(SearchManager.QUERY, result);  
-				startActivity(search); 
+				startActivity(search);
+				
+			//	goHome();
 		}
 		})
 		.setNegativeButton("Retake image", new DialogInterface.OnClickListener() {
@@ -350,5 +364,10 @@ public class ImageSearchRatinMalkud extends Activity {
 			
 		AlertDialog myAlert = builder.create();
 		myAlert.show();
+	}
+	
+	public void goHome(){
+		Intent intent = new Intent(this, HomeScreen.class);
+		startActivity(intent);
 	}
 }
