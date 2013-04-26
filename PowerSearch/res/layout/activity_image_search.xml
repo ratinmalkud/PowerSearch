@@ -6,27 +6,12 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+     android:background="#000000"
     tools:context=".ImageSearch" >
 
-    <Button
-        android:id="@+id/button_image_search"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="149dp"
-        android:clickable="true"
-        android:onClick="imageSearch"
-        android:text="Web Search" />
-    
-    <ImageView
-        android:id="@+id/homeFromImageSearch1"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:clickable="true"
-        android:onClick="goHomeImage"
-        android:src="@drawable/home" />
+        android:text="@string/hello_world" />
 
 </RelativeLayout>

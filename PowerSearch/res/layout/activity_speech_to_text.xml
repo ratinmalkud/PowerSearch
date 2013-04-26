@@ -5,6 +5,7 @@
     android:layout_above="@+id/textView1"
     android:layout_toLeftOf="@+id/textView1"
     android:gravity="center"
+     android:background="#000000"
     android:orientation="vertical" >
  
     <ImageButton
