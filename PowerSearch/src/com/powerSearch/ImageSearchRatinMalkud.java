@@ -323,7 +323,7 @@ public class ImageSearchRatinMalkud extends Activity {
 	public void onDestroy() {
 		if (DEBUG) Log.d(TAG,"onDestroy");
 		iqe.destroy();
-		goHome();
+	//	goHome();
 		super.onDestroy();
 	}
 	
