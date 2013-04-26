@@ -91,9 +91,6 @@ public class ImageSearchRatinMalkud extends Activity {
 	// Maximum duration of a remote search.
 	static final long REMOTE_MATCH_MAX_DURATION = 10000;
 	
-
-
-	
 	static final int MAX_ITEM_HISTORY = 20;
 
 	static final boolean PROCESS_ASYNC = true;
@@ -103,8 +100,6 @@ public class ImageSearchRatinMalkud extends Activity {
 	private static final String TAG = "------------------------";
 
 	private Handler handler;
-
-//	private Preview preview;
 
 	private ImageButton snapButton;
 
@@ -120,7 +115,6 @@ public class ImageSearchRatinMalkud extends Activity {
 
 	private AtomicBoolean activityRunning = new AtomicBoolean(false);
 	
-//	private Preview.FrameReceiver mreceiver;
 	/********************************************************************************************/
 	
 	@Override
@@ -178,24 +172,15 @@ public class ImageSearchRatinMalkud extends Activity {
 	public void startSearch(){
 		width = bmp.getWidth();
 		height = bmp.getHeight();
-		//frames = new byte[((width * height * bpp) / 8)];
 
 		int [] argb = new int[width * height];
 		bmp.getPixels(argb, 0, width, 0, 0, width, height);
 		byte [] yuv = new byte[width*height*3/2];
 		frames = encodeYUV420SP(yuv, argb, width, height);
+		
 		bmp.recycle();
-
 		yuvs = new YuvImage(yuv, ImageFormat.NV21, width, height, null);
-		//b is the Bitmap 
-		//int bytes = bmp.getWidth()*bmp.getHeight()*4; //calculate how many bytes our image consists of. Use a different value than 4 if you don't use 32bit images.
-		//ByteBuffer buffer = ByteBuffer.allocate(bytes); //Create a new buffer
-		//bmp.copyPixelsToBuffer(buffer); //Move the byte data to the buffer
-		//byte[] array = buffer.array(); //Get the underlying array containing the data.
-
-		//yuv = new YuvImage(array, ImageFormat.NV21, width, height, null); 
 		iqe.sendMessageAtFrontOfQueue(iqe.obtainMessage(IQE.CMD_DECODE, IQE.snap, 0, yuvs));
-//			processImageSnap(yuv);
 		}
 	
 	
@@ -243,12 +228,6 @@ public class ImageSearchRatinMalkud extends Activity {
 						"This may take a minute... We will notify you when your photo is recognized.",
 						Toast.LENGTH_LONG).show();
 				}
-			//	//pd.dismiss();
-				//pd.pdDismissed();
-			//	unfreezePreview();
-			//	iqe.goScan();
-			//	snapButton
-			//	.setImageResource(R.drawable.ic_camera);
 		}
 	};
 		handler.postDelayed(postponedToastAction, REMOTE_MATCH_MAX_DURATION);
@@ -278,25 +257,13 @@ public class ImageSearchRatinMalkud extends Activity {
 			switch (callType) {
 			
 			case (IQE.scan):
-			//	createHistoryItem(queryId, path, IQE.scan);
+				Log.d(TAG,"Should not be in scan");
 				break;
 			
 			case (IQE.snap):
 				createHistoryItem(queryId, path, IQE.snap);
 				lastPostedQid = queryId;
 				Log.d(TAG, "before pd");
-		//		iqe.goScan();
-		//		Message.obtain(iqe, IQE.CMD_DECODE, IQE.scan, 0, yuv).sendToTarget();
-			/*	if (SEARCH_OBJECT_REMOTE) {
-					handler.post(new Runnable() {
-						@Override
-						public void run() {
-							
-							pd.setMessage("Searching...");
-							Log.d(TAG, "after pd");
-						}
-					});
-				} */
 				break;
 			}
 		}
@@ -352,39 +319,7 @@ public class ImageSearchRatinMalkud extends Activity {
 			//if it is a remote match
 			else {
 				Toast.makeText(getBaseContext(),oNm,Toast.LENGTH_SHORT).show();
-				//	if (queryId.equals(lastPostedQid)) {
-				//	handler.removeCallbacks(postponedToastAction);
-			//	}
-			/*	Uri uri = null;
-				// match's Metadata set as URI.
-				if (objMeta != null) {
-
-					try {
-						uri = Uri.parse(objMeta);
-					} catch (Exception e1) {
-						uri = null;
-					}
-				}
-				// if no Metadata : match's name set as URI.
-				if (uri == null) {
-
-					if (objName != null) {
-
-						try {
-							uri = Uri.parse(objName);
-						} catch (Exception e1) {
-							uri = null;
-						}
-					}
-				}
-				final Uri fUri = uri;
-				handler.post(new Runnable() {
-					@Override
-					public void run() {
-						// process and display the results
-						processSearchResult(qId, oNm, fUri, callType);
-					}
-				});*/
+				//TODO: Add display and then search after click here
 			}
 		}
 
@@ -411,10 +346,7 @@ public class ImageSearchRatinMalkud extends Activity {
 									"Unable to connect to the server. "
 											+ "Check your intenet connection.",
 									Toast.LENGTH_LONG).show();
-						//	pd.dismiss();
-						//	pd.pdDismissed();
-						//	unfreezePreview();
-						}
+							}
 					});
 				} else {
 					Log.e(TAG, "Unable to complete search", e);
@@ -439,42 +371,7 @@ public class ImageSearchRatinMalkud extends Activity {
 	
 	private void processSearchResult(String searchId, String label, Uri uri,
 			final int callType) {
-/*
-		HistoryItem item = null;
-	
-		for (Iterator<HistoryItem> iter = history.iterator();;) {
-			if (!iter.hasNext()) {
-				break;
-			}
-			item = iter.next();
-			if (searchId.equals(item.id)) {
-				if (DEBUG) Log.d(TAG, "" + item.id);
-				if (DEBUG) Log.d(TAG, "" + searchId);
-				item.label = label;
-				item.uri = uri;
-				break;
-			} else {
-				item = null;
-			}
-		} 
 
-		if (item == null) {
-			if (DEBUG) Log.w(TAG, "No entry found for qid: " + searchId);
-		//	startScanning();
-			return;
-		}
-		historyListAdapter.notifyDataSetChanged();
-		
-		if (!activityRunning.get()) {
-			return;
-		}
-		*/
-		
-//		does not display the result if the query isn't the last posted
-//		if (!searchId.equals(lastPostedQid)) {
-//			return;
-//		}
-		
 		
 		Boolean validUri = false;
 		// Try to display the resources from the Uri. //
@@ -491,13 +388,6 @@ public class ImageSearchRatinMalkud extends Activity {
 			validUri = processMetaUri(this, uri);
 		}
 		//*********************************************//
-		/////////////////////////////////////////////////
-
-		// If no Metadata available, just display the match found and the label.
-
-	//	if (!validUri) {
-		//	displayResult(item, callType, null);
-	//	}
 	}
 	
 	static boolean processMetaUri(Activity a, Uri uri) {
@@ -524,37 +414,9 @@ public class ImageSearchRatinMalkud extends Activity {
 		Bitmap thumb = null;
 
 		switch (callType) {
-		/*
-		case (IQE.scan):
-			try {
-				InputStream is = this.getAssets().open(
-						"iqedata/" + path + "/" + path + ".jpg");				
-				Bitmap origBmp = BitmapFactory.decodeStream(is);
-				thumb = transformBitmapToThumb(origBmp);
-			} catch (IOException e) {
-				thumb = null;
-			}
-			break;
-			*/
-		case (IQE.snap):
-			
-		//	Bitmap origBmp = BitmapFactory.decodeFile(path);
-		//	thumb = transformBitmapToThumb(origBmp);
-		//	thumb = Utils.rotateBitmap(thumb, preview.getAngle());
-			
+			case (IQE.snap):
+			Log.d(TAG, "Dummy history item created");
 		}
-
-	//	HistoryItem item = new HistoryItem();
-	//	item.id = lastPostedQid = qid;
-	//	item.label = "Searching...";
-	//	item.uri = null;
-	//	item.thumb = thumb;
-
-	//	if (history.size() > MAX_ITEM_HISTORY)
-	//		history.remove(0);
-
-	//	history.add(item);
-
 		if (DEBUG) Log.d(TAG, "History item created for qid: " + qid);
 	}
 
@@ -563,10 +425,6 @@ public class ImageSearchRatinMalkud extends Activity {
 		super.onResume();
 		activityRunning.set(true);
 		iqe.resume();
-	/*	preview.setFrameReceiver(mreceiver);
-		if(preview.mCamera!=null){
-			unfreezePreview();
-		}*/
 	}
 	
 
@@ -574,10 +432,7 @@ public class ImageSearchRatinMalkud extends Activity {
 	public void onPause() {
 		if (DEBUG) Log.d(TAG, "onPause");
 		
-	//	stopScanning();
 		iqe.pause();
-	//	historyItemDao.saveAll(history);
-	//	preview.stopPreview();
 		activityRunning.set(false);
 		super.onPause();
 	}
