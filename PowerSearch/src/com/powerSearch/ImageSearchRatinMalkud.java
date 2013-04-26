@@ -20,6 +20,7 @@ import com.iqengines.sdk.IQE.OnResultCallback;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
 import android.app.Activity;
@@ -180,28 +181,21 @@ public class ImageSearchRatinMalkud extends Activity {
 		//frames = new byte[((width * height * bpp) / 8)];
 		
 		int [] argb = new int[width * height];
-
-        bmp.getPixels(argb, 0, width, 0, 0, width, height);
-
-        byte [] yuv = new byte[width*height*3/2];
+	    bmp.getPixels(argb, 0, width, 0, 0, width, height);
+	    byte [] yuv = new byte[width*height*3/2];
         frames = encodeYUV420SP(yuv, argb, width, height);
-
-        bmp.recycle();
+		bmp.recycle();
         
         yuvs = new YuvImage(yuv, ImageFormat.NV21, width, height, null);
-		//b is the Bitmap    
-		//int bytes = bmp.getWidth()*bmp.getHeight()*4; //calculate how many bytes our image consists of. Use a different value than 4 if you don't use 32bit images.
-
-		//ByteBuffer buffer = ByteBuffer.allocate(bytes); //Create a new buffer
-		//bmp.copyPixelsToBuffer(buffer); //Move the byte data to the buffer
-
-		//byte[] array = buffer.array(); //Get the underlying array containing the data.
 		
-		//yuv = new YuvImage(array, ImageFormat.NV21, width, height, null); 
 		iqe.sendMessageAtFrontOfQueue(iqe.obtainMessage(IQE.CMD_DECODE, IQE.snap, 0, yuv));
 	//	processImageSnap(yuv);
 	}
-	
+		//yuv = new YuvImage(array, ImageFormat.NV21, width, height, null); 
+		//iqe.sendMessageAtFrontOfQueue(iqe.obtainMessage(IQE.CMD_DECODE, IQE.snap, 0, yuvs));
+//			processImageSnap(yuv);
+	//	}
+		
 	byte[] encodeYUV420SP(byte[] yuv420sp, int[] argb, int width, int height) {
         final int frameSize = width * height;
 
@@ -292,6 +286,8 @@ public class ImageSearchRatinMalkud extends Activity {
 				createHistoryItem(queryId, path, IQE.snap);
 				lastPostedQid = queryId;
 				Log.d(TAG, "before pd");
+		//		iqe.goScan();
+		//		Message.obtain(iqe, IQE.CMD_DECODE, IQE.scan, 0, yuv).sendToTarget();
 			/*	if (SEARCH_OBJECT_REMOTE) {
 					handler.post(new Runnable() {
 						@Override
@@ -327,7 +323,7 @@ public class ImageSearchRatinMalkud extends Activity {
 			Log.d("--------------------------", "IN onResult");
 			final String qId = queryId;
 			final String oNm = objName;
-			
+			Log.d("----------------","in on result");
 			// if the it is a barcode
 			if (engine == IQE.barcode) {
 				handler.post(new Runnable() {
@@ -356,10 +352,13 @@ public class ImageSearchRatinMalkud extends Activity {
 			
 			//if it is a remote match
 			else {
-				if (queryId.equals(lastPostedQid)) {
-					handler.removeCallbacks(postponedToastAction);
+			//	if (queryId.equals(lastPostedQid)) {
+				//	handler.removeCallbacks(postponedToastAction);
+				Toast.makeText(getBaseContext(),oNm,Toast.LENGTH_SHORT).show();
+				//	if (queryId.equals(lastPostedQid)) {
+				//	handler.removeCallbacks(postponedToastAction);
 				}
-				Uri uri = null;
+			/*	Uri uri = null;
 				// match's Metadata set as URI.
 				if (objMeta != null) {
 
@@ -388,9 +387,9 @@ public class ImageSearchRatinMalkud extends Activity {
 						// process and display the results
 						processSearchResult(qId, oNm, fUri, callType);
 					}
-				});
+				});*/
 			}
-		}
+	//	}
 
 		/**
 		 * When no match are found, or exception occurs.
@@ -401,6 +400,7 @@ public class ImageSearchRatinMalkud extends Activity {
 		@Override
 		public void onNoResult(int callType, Exception e, File imgFile) {
 			
+			Log.d("----------------","in no result");
 			// if an exception occured
 			if (e != null) {
 				if (e instanceof IOException) {
@@ -428,10 +428,12 @@ public class ImageSearchRatinMalkud extends Activity {
 			switch (callType) {
 				
 			case (IQE.scan):
+				Log.d("------------","scan now");
 			//	startScanning();
 				break;
 
 			case (IQE.snap):
+				Log.d("-----------------","snap");
 				//displayResult(null, IQE.snap, imgFile);
 				break;
 			}
@@ -472,9 +474,9 @@ public class ImageSearchRatinMalkud extends Activity {
 		*/
 		
 //		does not display the result if the query isn't the last posted
-		if (!searchId.equals(lastPostedQid)) {
-			return;
-		}
+//		if (!searchId.equals(lastPostedQid)) {
+	//		return;
+	//	}
 		
 		
 		Boolean validUri = false;
@@ -559,5 +561,39 @@ public class ImageSearchRatinMalkud extends Activity {
 		if (DEBUG) Log.d(TAG, "History item created for qid: " + qid);
 	}
 
+	public void onResume() {
+		Log.d(TAG,"in On resume");
+		super.onResume();
+		activityRunning.set(true);
+		iqe.resume();
+	/*	preview.setFrameReceiver(mreceiver);
+		if(preview.mCamera!=null){
+			unfreezePreview();
+		}*/
+	}
+	
+
+	@Override
+	public void onPause() {
+		if (DEBUG) Log.d(TAG, "onPause");
+		
+	//	stopScanning();
+		iqe.pause();
+	//	historyItemDao.saveAll(history);
+	//	preview.stopPreview();
+		activityRunning.set(false);
+		super.onPause();
+	}
+	
+
+	@Override
+	public void onDestroy() {
+		if (DEBUG) Log.d(TAG,"onDestroy");
+		iqe.destroy();
+		super.onDestroy();
+	}
+	
+	
+	
 	/**********************************************************************************************/
 }
