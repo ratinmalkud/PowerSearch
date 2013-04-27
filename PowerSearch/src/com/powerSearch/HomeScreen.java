@@ -16,8 +16,6 @@ import android.widget.Toast;
 public class HomeScreen extends Activity {
 
 	String text_input;
-
-	
 	double lat, lng;
 	LocationManager locMgr;
 	LocationListener locListener;

@@ -9,10 +9,14 @@
      android:background="#000000"
     tools:context=".ImageSearchRatinMalkud" >
 
-    <ImageView
-        android:id="@+id/display"
-        android:layout_width="500dp"
-        android:layout_height="400dp"
-        android:layout_centerHorizontal="true" />
+    <TextView
+        android:id="@+id/searching"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="178dp"
+        android:text="Searching..."
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>
