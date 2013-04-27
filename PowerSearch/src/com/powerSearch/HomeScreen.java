@@ -15,11 +15,7 @@ import android.widget.Toast;
 
 public class HomeScreen extends Activity {
 
-	Button location_search;
-	Button image_search;
-	Button text_search;
-	Button audio_search;
-	
+		
 	double lat, lng;
 	LocationManager locMgr;
 	LocationListener locListener;
@@ -29,10 +25,6 @@ public class HomeScreen extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home_screen);
 		
-		location_search = (Button) findViewById(R.id.button_location_search);
-		image_search = (Button) findViewById(R.id.button_image_search);
-		audio_search = (Button) findViewById(R.id.button_audio_search);
-		text_search = (Button) findViewById(R.id.button_text_search);
 
 	}
 

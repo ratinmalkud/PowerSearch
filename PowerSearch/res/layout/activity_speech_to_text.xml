@@ -5,6 +5,7 @@
     android:layout_above="@+id/textView1"
     android:layout_toLeftOf="@+id/textView1"
     android:gravity="center"
+     android:background="#000000"
     android:orientation="vertical" >
  
     <ImageButton
@@ -40,6 +41,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
+         android:textColor="#FFFFFF"
         android:textAppearance="?android:attr/textAppearanceLarge" />
  
 </LinearLayout>
