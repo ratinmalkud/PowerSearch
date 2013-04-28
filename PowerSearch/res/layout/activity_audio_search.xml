@@ -17,7 +17,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:text="Audio Search"
-        android:textColor="#FFFFFF"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ImageView
@@ -38,10 +37,9 @@
         android:layout_below="@+id/homeFromAudio1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
-        android:background="@drawable/sample2"
+         android:background="@drawable/sample2"
         android:onClick="startRecording"
-        android:text="Start Recording"
-        android:textColor="#000000" />
+        android:text="Start Recording" />
 
     <Button
         android:id="@+id/stopRecordingButton"
@@ -52,7 +50,6 @@
         android:layout_marginTop="63dp"
         android:background="@drawable/sample"
         android:onClick="stopRecording"
-        android:text="Stop Recording"
-        android:textColor="#000000" />
+        android:text="Stop Recording" />
 
 </RelativeLayout>
