@@ -34,29 +34,34 @@
     <Button
         android:id="@+id/playRecording"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_below="@+id/display"
         android:layout_centerHorizontal="true"
+
+        android:background="@drawable/sample2"
         android:onClick="playRecording"
         android:text="Play Recording" />
 
     <Button
         android:id="@+id/recordAgainButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_below="@+id/playRecording"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="43dp"
+        android:background="@drawable/sample"
         android:onClick="recordAgain"
         android:text="Record Again" />
 
     <Button
         android:id="@+id/audioSearchButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_below="@+id/recordAgainButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="34dp"
+        android:background="@drawable/sample2"
+      
         android:onClick="performAudioSearch"
         android:text="Use Current" />
 

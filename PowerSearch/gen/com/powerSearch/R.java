@@ -144,7 +144,9 @@ containing a value of this type.
         public static final int home=0x7f020002;
         public static final int ic_launcher=0x7f020003;
         public static final int image_search=0x7f020004;
-        public static final int text_search=0x7f020005;
+        public static final int sample=0x7f020005;
+        public static final int sample2=0x7f020006;
+        public static final int text_search=0x7f020007;
     }
     public static final class id {
         public static final int LinearLayout2=0x7f05000c;
