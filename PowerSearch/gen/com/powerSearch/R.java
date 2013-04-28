@@ -144,9 +144,7 @@ containing a value of this type.
         public static final int home=0x7f020002;
         public static final int ic_launcher=0x7f020003;
         public static final int image_search=0x7f020004;
-        public static final int sample=0x7f020005;
-        public static final int sample2=0x7f020006;
-        public static final int text_search=0x7f020007;
+        public static final int text_search=0x7f020005;
     }
     public static final class id {
         public static final int LinearLayout2=0x7f05000c;
@@ -154,30 +152,30 @@ containing a value of this type.
         public static final int audioDisplay2=0x7f050020;
         public static final int audioSearchButton=0x7f050023;
         public static final int audioSearchDisplay=0x7f050005;
-        public static final int btnRerecord=0x7f050018;
-        public static final int btnSearch=0x7f050019;
-        public static final int btnSpeak=0x7f050017;
+        public static final int btnRerecord=0x7f050019;
+        public static final int btnSearch=0x7f05001a;
+        public static final int btnSpeak=0x7f050018;
         public static final int button_capture=0x7f05000a;
-        public static final int button_start_search=0x7f05001b;
+        public static final int button_start_search=0x7f05001c;
         public static final int camera_preview=0x7f050009;
-        public static final int display=0x7f05001f;
-        public static final int editText_textsearch=0x7f05001c;
+        public static final int display=0x7f050015;
+        public static final int editText_textsearch=0x7f05001d;
         public static final int homeFromAudio1=0x7f050006;
-        public static final int homeFromTextSearch1=0x7f05001d;
+        public static final int homeFromTextSearch1=0x7f05001e;
         public static final int hybrid=0x7f050004;
         public static final int id_location_search=0x7f050011;
         public static final int imageView1=0x7f05000d;
         public static final int imageView2=0x7f05000e;
         public static final int imageView4=0x7f050012;
-        public static final int locationSearchTV=0x7f05001e;
-        public static final int map=0x7f050016;
+        public static final int locationSearchTV=0x7f05001f;
+        public static final int map=0x7f050017;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
         public static final int playRecording=0x7f050021;
         public static final int recordAgainButton=0x7f050022;
         public static final int satellite=0x7f050002;
         public static final int scrollView=0x7f05000b;
-        public static final int searching=0x7f050015;
+        public static final int searching=0x7f050016;
         public static final int startRecordingButton=0x7f050007;
         public static final int stopRecordingButton=0x7f050008;
         public static final int terrain=0x7f050003;
@@ -185,7 +183,7 @@ containing a value of this type.
         public static final int textView2=0x7f050010;
         public static final int textView3=0x7f050013;
         public static final int textView4=0x7f050014;
-        public static final int txtText=0x7f05001a;
+        public static final int txtText=0x7f05001b;
     }
     public static final class layout {
         public static final int activity_audio_search=0x7f030000;
@@ -199,7 +197,8 @@ containing a value of this type.
         public static final int activity_text_screen1=0x7f030008;
         public static final int activity_to_test=0x7f030009;
         public static final int activity_verify_audio=0x7f03000a;
-        public static final int main=0x7f03000b;
+        public static final int homescreentest=0x7f03000b;
+        public static final int main=0x7f03000c;
     }
     public static final class menu {
         public static final int audio_search=0x7f080000;
