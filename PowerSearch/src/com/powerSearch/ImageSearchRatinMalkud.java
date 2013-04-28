@@ -95,7 +95,6 @@ public class ImageSearchRatinMalkud extends Activity {
 	// Maximum duration of a remote search.
 	static final long REMOTE_MATCH_MAX_DURATION = 10000;
 	
-	static boolean GoogleSearchFlag = false;
 
 
 	
@@ -125,7 +124,6 @@ public class ImageSearchRatinMalkud extends Activity {
 		
 		iqe = new IQE(this, SEARCH_OBJECT_REMOTE,SEARCH_OBJECT_LOCAL,
 				SEARCH_OBJECT_BARCODE, onResultCallback, KEY, SECRET);
-		GoogleSearchFlag=false;
 		
 		ContentValues values = new ContentValues();
 		values.put(Media.TITLE, "My demo image");
@@ -317,12 +315,8 @@ public class ImageSearchRatinMalkud extends Activity {
 	
 	@Override
 	protected void onRestart(){
-		Log.d(TAG,"In on restart");
 		super.onRestart();
-		if(GoogleSearchFlag){
-			Log.d(TAG,"gohome in restart");
-			goHome();
-		}
+	//	goHome();
 	}
 
 	@Override
@@ -334,7 +328,6 @@ public class ImageSearchRatinMalkud extends Activity {
 	}
 	
 	public void startAgain(){
-		Log.d(TAG,"Start again");
 		Intent intent = new Intent(this, ImageSearchRatinMalkud.class);
 		startActivity(intent);
 	}
@@ -355,7 +348,7 @@ public class ImageSearchRatinMalkud extends Activity {
 				Intent search = new Intent(Intent.ACTION_WEB_SEARCH);  
 				search.putExtra(SearchManager.QUERY, result);  
 				startActivity(search);
-				GoogleSearchFlag=true;
+				
 			//	goHome();
 		}
 		})
