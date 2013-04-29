@@ -57,15 +57,32 @@ public class Text_screen1 extends Activity {
 		});
 	}
 	
+	/*
+	 *  This method takes the user back to the home screen
+	 */
+	
 	public void goHome(View view){
 		Intent intent = new Intent(this, HomeScreen.class);
 		startActivity(intent);
 	}
 	
+	/*
+	 *  Starts a google search in the browser. The Intent.ACTION_WEB_SEARCH is used to start hte search.
+	 */
 	
 	private void text_search(){
 		
 		String search_input = enter_string.getText().toString() ;
+		
+		/*
+		 *  If nothing has been entered in the edit text, ask the user to enter input again.
+		 */
+		if (search_input.length() == 0){
+			Toast.makeText(getApplicationContext(), "No text to search", Toast.LENGTH_LONG).show();
+			Intent restart = new Intent(this, Text_screen1.class);
+			startActivity(restart);
+		}
+		
 		Intent search = new Intent(Intent.ACTION_WEB_SEARCH);  
 		search.putExtra(SearchManager.QUERY, search_input);  
 		startActivity(search);  
