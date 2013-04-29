@@ -67,7 +67,7 @@ public class Text_screen1 extends Activity {
 	}
 	
 	/*
-	 *  Starts a google search in the browser. The Intent.ACTION_WEB_SEARCH is used to start hte search.
+	 *  Starts a google search in the browser. The Intent.ACTION_WEB_SEARCH is used to start the search.
 	 */
 	
 	private void text_search(){
