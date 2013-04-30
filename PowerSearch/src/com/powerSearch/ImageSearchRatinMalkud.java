@@ -125,6 +125,7 @@ public class ImageSearchRatinMalkud extends Activity {
 		
 		iqe = new IQE(this, SEARCH_OBJECT_REMOTE,SEARCH_OBJECT_LOCAL,
 				SEARCH_OBJECT_BARCODE, onResultCallback, KEY, SECRET);
+		
 		GoogleSearchFlag=false;
 		
 		ContentValues values = new ContentValues();
