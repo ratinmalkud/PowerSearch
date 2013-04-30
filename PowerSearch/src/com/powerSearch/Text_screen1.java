@@ -33,9 +33,12 @@ public class Text_screen1 extends Activity {
 		enter_string.setFocusableInTouchMode(true);
 		enter_string.requestFocus();
 		
+		
+		/*
+		 * Start search when the search button is clicked
+		 */
 		start_search.setOnClickListener(new OnClickListener(){
 			public void onClick(View V){
-			//	System.out.println("IN onclick in location screen 1");
 				text_search();
 				finish();
 			}
@@ -47,7 +50,7 @@ public class Text_screen1 extends Activity {
 			{
 				System.out.println("In check for enter");
 				if(actionid == EditorInfo.IME_ACTION_SEARCH){
-					text_search();
+			 		text_search();
 					Toast.makeText(getApplicationContext(), enter_string.getText().toString(), Toast.LENGTH_SHORT).show();
 					return true;
 					}
@@ -57,15 +60,35 @@ public class Text_screen1 extends Activity {
 		});
 	}
 	
+	/*
+	 *  This method takes the user back to the home screen
+	 */
+	
 	public void goHome(View view){
 		Intent intent = new Intent(this, HomeScreen.class);
 		startActivity(intent);
 	}
 	
+	/*
+	 *  Starts a google search in the browser. The Intent.ACTION_WEB_SEARCH is used to start the search.
+	 */
 	
 	private void text_search(){
 		
 		String search_input = enter_string.getText().toString() ;
+		
+		/*
+		 *  If nothing has been entered in the edit text, ask the user to enter input again.
+		 */
+		if (search_input.length() == 0){
+			Toast.makeText(getApplicationContext(), "No text to search", Toast.LENGTH_LONG).show();
+			Intent restart = new Intent(this, Text_screen1.class);
+			startActivity(restart);
+		}
+		
+		/*
+		 * Start search
+		 */
 		Intent search = new Intent(Intent.ACTION_WEB_SEARCH);  
 		search.putExtra(SearchManager.QUERY, search_input);  
 		startActivity(search);  

@@ -30,25 +30,7 @@ import android.view.View;
 import android.widget.Toast;
 
 public class LocationSearch extends Activity {
-	/*
-	com.google.android.maps.MapView map;
-	Geocoder geo;
-	GeoPoint pt;
-	LatLng position;
-	Projection show;
-	Point onScreen;
-	LocationSource ls;
-	LocationManager locMgr;
-	LocationListener locListener;
-	MyLocationOverlay whereAmI = null;
-	MapController mc;
-*/
-	//GoogleMap gm;
-//	LocationManager locMgr;
-//	LocationListener locListener;
-	//double lat, lng;
-//	LatLng position;
-		
+			
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -59,52 +41,13 @@ public class LocationSearch extends Activity {
 		double lng = intent.getDoubleExtra("Lng", -122.1);
 		GoogleMap gm = ((MapFragment)getFragmentManager().findFragmentById(R.id.map)).getMap();
 		gm.setMyLocationEnabled(true);
+	
+		/*
+		 * Display the mapfragment with the correct position
+		 */
 		
 		LatLng position = new LatLng(lat, lng);
-	/*
-		locMgr = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-		
-		locListener = new LocationListener()
-		{
-			public void onLocationChanged(Location location)
-			{
-			if (location != null)
-			{
-				lat = location.getLatitude();
-				lng = location.getLongitude();
-				
-				position = new LatLng(lat, lng);
-				gm.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 15));
-
-			}
-			}
-
-			@Override
-			public void onProviderDisabled(String provider) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onProviderEnabled(String provider) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onStatusChanged(String provider, int status,
-					Bundle extras) {
-				// TODO Auto-generated method stub
-				
-			}};
-			
-			locMgr.requestLocationUpdates(
-					LocationManager.NETWORK_PROVIDER,
-					0, // minTime in ms
-					0, // minDistance in meters
-					locListener);
-			*/
-			CameraPosition cameraPosition = new CameraPosition.Builder()
+				CameraPosition cameraPosition = new CameraPosition.Builder()
 		    .target(position)      // Sets the center of the map to Mountain View
 		    .zoom(17)                   // Sets the zoom
 		    .bearing(90)                // Sets the orientation of the camera to east

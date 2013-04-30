@@ -11,6 +11,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -38,21 +39,37 @@ public class HomeScreen extends Activity {
 		getMenuInflater().inflate(R.menu.home_screen, menu);
 		return true;
 	}
+
+	/*
+	 *  Start Audio Search 
+	 */
 	
 	public void initiateAudioSearch(View view){
 		Intent intent = new Intent(this, AudioSearch.class);
 		startActivity(intent);
 	}
 	
+	/*
+	 *  Start Image Search
+	 */
+	
 	public void initiateImageSearch(View view){
 		Intent intent = new Intent(this, ImageSearchRatinMalkud.class);
 		startActivity(intent);
 	}
 
+	/*
+	 *  Start Text Search
+	 */
+	
 	public void initiateTextSearch(View V){
 		Intent i = new Intent(this, Text_screen1.class);
 		startActivity(i);
 	}
+	
+	/*
+	 *  Decide whether to use GPS or network location for Location Search
+	 */
 	
 	public void determineProvider(View view){
 		
@@ -84,15 +101,21 @@ public class HomeScreen extends Activity {
 		myAlert.show();
 	}
 	
+	/*
+	 *  Start location search by using whichever service was selected before.
+	 */
+	
 	public void findMe(){
-		
-		//determineProvider();
-		
+				
 		if(gps){
 			locMgr = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 			
 			locListener = new LocationListener()
 			{
+
+				/*
+				 * Get the current location
+				 */
 				public void onLocationChanged(Location location)
 				{
 				if (location != null)
@@ -104,10 +127,13 @@ public class HomeScreen extends Activity {
 				}
 				}
 
+				/*
+				 * If location services are turned off, alert the user and go back to home screen
+				 */
 				@Override
-				public void onProviderDisabled(String provider) {
-					// TODO Auto-generated method stub
-					
+				public void onProviderDisabled(String provider) {	
+					Toast.makeText(getApplicationContext(), "Turn on network services", Toast.LENGTH_LONG).show();	
+					goHome();
 				}
 
 				@Override
@@ -147,8 +173,8 @@ public class HomeScreen extends Activity {
 
 				@Override
 				public void onProviderDisabled(String provider) {
-					// TODO Auto-generated method stub
-					
+					Toast.makeText(getApplicationContext(), "Turn on network services", Toast.LENGTH_LONG).show();	
+					goHome();
 				}
 
 				@Override
@@ -173,6 +199,10 @@ public class HomeScreen extends Activity {
 					
 	}
 	
+	/*
+	 *  Display location on Map by stating a new activity
+	 */
+		
 	public void startLocation(){
 		locMgr.removeUpdates(locListener);
 	
@@ -182,4 +212,25 @@ public class HomeScreen extends Activity {
 		startActivity(intent);
 	}
 	
+	/*
+	 * Goes back to homescreen, used when location services is off & user asks for location search 
+	 */
+	
+	public void goHome(){
+		Intent intent = new Intent(this, HomeScreen.class);
+		startActivity(intent);
+	}
+	
+	public void onPause() {
+		Log.d("-----------", "onPause");
+		super.onPause();
+	}
+	
+	public void onDestroy(){
+		super.onDestroy();
+	}
+	
+	public void onResume(){
+		super.onResume();
+	}
 }

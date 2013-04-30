@@ -74,7 +74,7 @@ public class ImageSearchRatinMalkud extends Activity {
 	static final String SECRET = "e3e30671c89c43dbb887187b7b67f2a1";
 
 	/**
-	 * Settings.
+	 * Settings. We are only using the remote search option provided by the IQEngine library.
 	 */
 	
 	// Activates the local search.
@@ -95,6 +95,7 @@ public class ImageSearchRatinMalkud extends Activity {
 	// Maximum duration of a remote search.
 	static final long REMOTE_MATCH_MAX_DURATION = 10000;
 	
+	//This is used to let the app know that a search has been performed. Needed for correct back operation.
 	static boolean GoogleSearchFlag = false;
 
 
@@ -123,11 +124,19 @@ public class ImageSearchRatinMalkud extends Activity {
 		searching = (TextView)findViewById(R.id.searching);
 		searching.setVisibility(View.VISIBLE);
 		
+		/*
+		 *  Start the iqe object. This is used for all the image processing done by iqengine.
+		 */
+		
 		iqe = new IQE(this, SEARCH_OBJECT_REMOTE,SEARCH_OBJECT_LOCAL,
 				SEARCH_OBJECT_BARCODE, onResultCallback, KEY, SECRET);
 		
 		GoogleSearchFlag=false;
 		
+		
+		/*
+		 *  Get image by launching a new activity for camera
+		 */
 		ContentValues values = new ContentValues();
 		values.put(Media.TITLE, "My demo image");
 		values.put(Media.DESCRIPTION, "Image Captured by Camera via an Intent");
@@ -150,11 +159,13 @@ public class ImageSearchRatinMalkud extends Activity {
 				bmp = MediaStore.Images.Media.getBitmap(this.getContentResolver(), pic);
 				startSearch();
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Toast.makeText(getApplicationContext(),"Image not found, retake picture", Toast.LENGTH_LONG).show();
+				Intent restart = new Intent(this, ImageSearchRatinMalkud.class);
+				startActivity(restart);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Toast.makeText(getApplicationContext(),"I/O error, retake picture", Toast.LENGTH_LONG).show();
+				Intent restart = new Intent(this, ImageSearchRatinMalkud.class);
+				startActivity(restart);
 			}
 		}
 		else{
@@ -163,6 +174,11 @@ public class ImageSearchRatinMalkud extends Activity {
 		}
 	}
 		
+	/*
+	 * This method is called when the search is initiated by clicking the tick mark in the camera activity. It converts
+	 * the image into a yuv image. The yuv image is used by the IQEngin sdk for carrying out the image search. 
+	 */
+	
 	public void startSearch(){
 		width = bmp.getWidth();
 		height = bmp.getHeight();
@@ -170,7 +186,10 @@ public class ImageSearchRatinMalkud extends Activity {
 		int [] argb = new int[width * height];
 	    bmp.getPixels(argb, 0, width, 0, 0, width, height);
 	    byte [] yuv = new byte[width*height*3/2];
-        frames = encodeYUV420SP(yuv, argb, width, height);
+    /*
+     *  Convert jpg to yuv image
+     */
+	    frames = encodeYUV420SP(yuv, argb, width, height);
 		bmp.recycle();
         
         yuvs = new YuvImage(yuv, ImageFormat.NV21, width, height, null);
@@ -178,6 +197,10 @@ public class ImageSearchRatinMalkud extends Activity {
 		iqe.sendMessageAtFrontOfQueue(iqe.obtainMessage(IQE.CMD_DECODE, IQE.snap, 0, yuvs));
 	}
 		
+	/*
+	 *  Converts the jpeg to yuv image. This part of the code was obtained & modified from stack overflow.
+	 *  http://stackoverflow.com/questions/5960247/convert-bitmap-array-to-yuv-ycbcr-nv21
+	 */
 	byte[] encodeYUV420SP(byte[] yuv420sp, int[] argb, int width, int height) {
         final int frameSize = width * height;
 
@@ -216,41 +239,22 @@ public class ImageSearchRatinMalkud extends Activity {
 	
 	private Runnable postponedToastAction;
 		
+	/*
+	 * This method is called when the IQEngine returns with a result 
+	 */
 	private OnResultCallback onResultCallback = new OnResultCallback() {
-
-		/**
-		 * Called whenever a query is done (In the demo app, we call it on every
-		 * snap queries and on Successful scan queries)
-		 * 
-		 * @param queryId
-		 *            A {@link String}, the unique Id of the query.
-		 * @param path
-		 *            A {@link String}, the path of the picture associated with
-		 *            the query.
-		 * @param callType
-		 *            An {@link Integer}, defines if it's a snap or a scan call.
-		 */
 
 		@Override
 		public void onQueryIdAssigned(String queryId, String path, int callType) {
+		/*
+		 * Used for matching query id's
+		 */
 			lastPostedQid = queryId;
 		}
 
-		/**
-		 * Handle the results.
-		 * 
-		 * @param queryId
-		 *            A {@link String}, the unique Id of the query.
-		 * @param objId
-		 *            A {@link String}, the unique Id identifying the object on
-		 *            our server. * @param objId A {@link String}, the object
-		 *            label. * @param objId A {@link String}, the object
-		 *            metadata. * @param objId A {@link Integer}, determines
-		 *            which engine made the match (barcode, local, remote).
-		 * @param callType
-		 *            An {@link Integer}, defines if it's a snap or a scan call.
+		/*
+		 * If result is found with a matching qid(query id),display it
 		 */
-
 		@Override
 		public void onResult(String queryId, String objId, String objName,
 				String objMeta, int engine, final int callType) {
@@ -260,18 +264,12 @@ public class ImageSearchRatinMalkud extends Activity {
 			result = oNm;
 			
 			showResult();
-		//	goHome();
-		//	Toast.makeText(getBaseContext(),oNm,Toast.LENGTH_LONG).show();
 		}
 		
-		
-
-		/**
-		 * When no match are found, or exception occurs.
-		 * 
-		 * 
+		/*
+		 * If no result found
 		 */
-
+		
 		@Override
 		public void onNoResult(int callType, Exception e, File imgFile) {
 			
@@ -293,19 +291,21 @@ public class ImageSearchRatinMalkud extends Activity {
 					});
 				} else {
 					Log.e(TAG, "Unable to complete search", e);
-					//Have a dialog here that will say search not successful.
+					Toast.makeText(getApplicationContext(), "Image search failed", Toast.LENGTH_LONG).show();
 				}
 				return;
 			}
 		}
 	};
 
+	/*
+	 * iqe.resume internally starts the receiver thread. This thread listens to the server for a response.
+	 */
 	public void onResume() {
 		Log.d(TAG,"in On resume");
 		super.onResume();
 		activityRunning.set(true);
 		iqe.resume();
-		//goHome();
 	}
 	
 	@Override
@@ -330,7 +330,6 @@ public class ImageSearchRatinMalkud extends Activity {
 	public void onDestroy() {
 		if (DEBUG) Log.d(TAG,"onDestroy");
 		iqe.destroy();
-	//	goHome();
 		super.onDestroy();
 	}
 	
@@ -339,6 +338,12 @@ public class ImageSearchRatinMalkud extends Activity {
 		Intent intent = new Intent(this, ImageSearchRatinMalkud.class);
 		startActivity(intent);
 	}
+	
+	
+	/*
+	 * Display the result in a dialog box. The user can select whether to carry out a further google search to find
+	 * related items
+	 */
 	
 	public void showResult(){
 		searching.setVisibility(View.INVISIBLE);
@@ -352,19 +357,16 @@ public class ImageSearchRatinMalkud extends Activity {
 		
 			@Override
 		public void onClick(DialogInterface dialog, int id){
-			//perform text search here
 				Intent search = new Intent(Intent.ACTION_WEB_SEARCH);  
 				search.putExtra(SearchManager.QUERY, result);  
 				startActivity(search);
 				GoogleSearchFlag=true;
-			//	goHome();
-		}
+			}
 		})
 		.setNegativeButton("Retake image", new DialogInterface.OnClickListener() {
 					
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
 				startAgain();
 			}
 		});
