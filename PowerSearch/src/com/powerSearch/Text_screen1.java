@@ -33,9 +33,12 @@ public class Text_screen1 extends Activity {
 		enter_string.setFocusableInTouchMode(true);
 		enter_string.requestFocus();
 		
+		
+		/*
+		 * Start search when the search button is clicked
+		 */
 		start_search.setOnClickListener(new OnClickListener(){
 			public void onClick(View V){
-			//	System.out.println("IN onclick in location screen 1");
 				text_search();
 				finish();
 			}
@@ -47,7 +50,7 @@ public class Text_screen1 extends Activity {
 			{
 				System.out.println("In check for enter");
 				if(actionid == EditorInfo.IME_ACTION_SEARCH){
-					text_search();
+			 		text_search();
 					Toast.makeText(getApplicationContext(), enter_string.getText().toString(), Toast.LENGTH_SHORT).show();
 					return true;
 					}
@@ -83,6 +86,9 @@ public class Text_screen1 extends Activity {
 			startActivity(restart);
 		}
 		
+		/*
+		 * Start search
+		 */
 		Intent search = new Intent(Intent.ACTION_WEB_SEARCH);  
 		search.putExtra(SearchManager.QUERY, search_input);  
 		startActivity(search);  
