@@ -37,6 +37,7 @@
         android:layout_height="50dp"
         android:layout_below="@+id/display"
         android:layout_centerHorizontal="true"
+
         android:background="@drawable/sample2"
         android:onClick="playRecording"
         android:text="Play Recording" />
@@ -60,6 +61,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="34dp"
         android:background="@drawable/sample2"
+      
         android:onClick="performAudioSearch"
         android:text="Use Current" />
 
