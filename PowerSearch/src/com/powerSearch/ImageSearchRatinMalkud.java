@@ -153,6 +153,11 @@ public class ImageSearchRatinMalkud extends Activity {
 		return true;
 	}
 	
+	/*
+	 * This method is called when the user takes an image and chooses to perform search.
+	 * The image is retrieved as a bitmap image and then translated to a YUV image.
+	 * This YUV image is passed to the iq-engine sdk.
+	 */
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(requestCode==0 && resultCode==Activity.RESULT_OK){
 			try {
@@ -175,8 +180,9 @@ public class ImageSearchRatinMalkud extends Activity {
 	}
 		
 	/*
-	 * This method is called when the search is initiated by clicking the tick mark in the camera activity. It converts
-	 * the image into a yuv image. The yuv image is used by the IQEngin sdk for carrying out the image search. 
+	 * This method is called when the search is initiated by clicking the tick mark in the camera activity.
+	 * It converts the image into a yuv image. The yuv image is used by the IQEngin sdk for carrying 
+	 * out the image search. 
 	 */
 	
 	public void startSearch(){
@@ -198,7 +204,7 @@ public class ImageSearchRatinMalkud extends Activity {
 	}
 		
 	/*
-	 *  Converts the jpeg to yuv image. This part of the code was obtained & modified from stack overflow.
+	 *  Converts the bitmap to yuv image. This part of the code was obtained & modified from stack overflow.
 	 *  http://stackoverflow.com/questions/5960247/convert-bitmap-array-to-yuv-ycbcr-nv21
 	 */
 	byte[] encodeYUV420SP(byte[] yuv420sp, int[] argb, int width, int height) {
@@ -341,10 +347,9 @@ public class ImageSearchRatinMalkud extends Activity {
 	
 	
 	/*
-	 * Display the result in a dialog box. The user can select whether to carry out a further google search to find
-	 * related items
+	 * Display the result in a dialog box. The user can select whether to carry out a further 
+	 * google search.
 	 */
-	
 	public void showResult(){
 		searching.setVisibility(View.INVISIBLE);
 		
@@ -376,6 +381,9 @@ public class ImageSearchRatinMalkud extends Activity {
 		myAlert.show();
 	}
 	
+	/*
+	 * Return to home screen when the home button is clicked.
+	 */
 	public void goHome(){
 		Intent intent = new Intent(this, HomeScreen.class);
 		startActivity(intent);

@@ -16,16 +16,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 public class AudioSearch extends Activity {
-	MediaRecorder recorder;
-	MediaPlayer player;
+//	MediaRecorder recorder;
+//	MediaPlayer player;
 	final int REQUEST_SPEECH = 13;
 	public final static String searchPhrase = "This is the search phrase";
 	ArrayList < String > toSearch;
 	
 	Button startButton;
-	Button stopButton;
+//	Button stopButton;
 	ImageView home;
-	String saveAt = "/sdcard/toSearch.3gpp";
+//	String saveAt = "/sdcard/toSearch.3gpp";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +33,10 @@ public class AudioSearch extends Activity {
 		setContentView(R.layout.activity_audio_search);
 		
 		startButton = (Button)findViewById(R.id.startRecordingButton);
-		stopButton = (Button)findViewById(R.id.stopRecordingButton);
+//		stopButton = (Button)findViewById(R.id.stopRecordingButton);
 		home = (ImageView)findViewById(R.id.homeFromAudio1);
 		
-		stopButton.setVisibility(View.INVISIBLE);
+//		stopButton.setVisibility(View.INVISIBLE);
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class AudioSearch extends Activity {
 	}
 	
 	/*
-	 * Go home when the home button is pressed
+	 * Go to home screen when the home button is pressed
 	 */
 	
 	public void goHome(View view){
@@ -56,7 +56,7 @@ public class AudioSearch extends Activity {
 	}
 	
 	/*
-	 * Start recording by using the REcognizer intent.
+	 * Start recording by using the Recognizer intent.
 	 * Audio-text conversion is done by the recognizer intent. Language model used in english-UK
 	 * Start result callback with the request speech option set
 	 */
@@ -98,7 +98,7 @@ public class AudioSearch extends Activity {
 	 /*
 	  *  Release all resources. 
 	  */
-	 
+/*	 
 	public void stopRecording(View view){
 		//startButton.setClickable(true);
 		
@@ -113,6 +113,6 @@ public class AudioSearch extends Activity {
 		
 		Intent intent = new Intent(this, VerifyAudio.class);
 		startActivity(intent);
-	}
+	}	*/
 
 }

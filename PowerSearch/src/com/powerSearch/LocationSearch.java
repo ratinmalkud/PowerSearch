@@ -30,7 +30,10 @@ import android.view.View;
 import android.widget.Toast;
 
 public class LocationSearch extends Activity {
-			
+	/*
+	 * Obtains the latitude and longitude from the intent.
+	 * Creates a CameraPosition object and sets it to centre on the obtained latitude and longitiude.
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

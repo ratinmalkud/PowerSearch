@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+
 public class HomeScreen extends Activity {
 
 		
@@ -68,7 +69,8 @@ public class HomeScreen extends Activity {
 	}
 	
 	/*
-	 *  Decide whether to use GPS or network location for Location Search
+	 *  Decide whether to use GPS or network location for Location Search and determine the latitude
+	 *  and longitude.
 	 */
 	
 	public void determineProvider(View view){

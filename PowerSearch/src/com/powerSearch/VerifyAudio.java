@@ -15,8 +15,8 @@ import android.view.View;
 import android.widget.Toast;
 
 public class VerifyAudio extends Activity implements OnInitListener{
-	MediaPlayer player;
-	String savedAt = "/sdcard/toSearch.3gpp";
+//	MediaPlayer player;
+//	String savedAt = "/sdcard/toSearch.3gpp";
 	String toSearch;
 	final static int CHECK_CODE = 1;
 	TextToSpeech myTTS;
@@ -42,6 +42,9 @@ public class VerifyAudio extends Activity implements OnInitListener{
 		return true;
 	}
 	
+	/*
+	 * Go to home screen when the home button is clicked.
+	 */
 	public void goHome(View view){
 		Intent intent = new Intent(this, HomeScreen.class);
 		startActivity(intent);
@@ -49,6 +52,10 @@ public class VerifyAudio extends Activity implements OnInitListener{
 	
 		
 	/*
+	 * This method gets called after the recoding is completed.
+	 * If the recording was successful,a TextToSpeech object is created.
+	 * If the device does not support TextToSpeech, an intent to install the required software is started.
+	 * We found this code on the website listed below and we modified to suit our application.
 	 * http://android-developers.blogspot.com/2009/09/introduction-to-text-to-speech-in.html
 	 */
 	
@@ -67,6 +74,10 @@ public class VerifyAudio extends Activity implements OnInitListener{
 	    }
 	}
 	
+	/*
+	 * This method gets triggered when the "Playback Recording" button is clicked.
+	 * The search text is converted to speech.
+	 */
 	public void playRecording(View view){
 		Toast toast = Toast.makeText(getBaseContext(), toSearch, Toast.LENGTH_SHORT);
 		toast.show();
@@ -75,11 +86,17 @@ public class VerifyAudio extends Activity implements OnInitListener{
 		myTTS.speak(toSearch, TextToSpeech.QUEUE_FLUSH, null);
 	}
 	
+	/*
+	 * This method takes the user back to the initial Audio Search screen so that he can record again.
+	 */
 	public void recordAgain(View view){
 		Intent intent = new Intent(this, AudioSearch.class);
 		startActivity(intent);
 	}
 	
+	/*
+	 * This method uses the "ACTION_WEB_SEARCH" intent to perform a Google search.
+	 */
 	public void performAudioSearch(View view){
 		Intent search = new Intent(Intent.ACTION_WEB_SEARCH);  
 		search.putExtra(SearchManager.QUERY, toSearch);  
