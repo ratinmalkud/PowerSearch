@@ -30,6 +30,7 @@ import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -137,13 +138,41 @@ public class ImageSearchRatinMalkud extends Activity {
 		/*
 		 *  Get image by launching a new activity for camera
 		 */
-		ContentValues values = new ContentValues();
-		values.put(Media.TITLE, "My demo image");
-		values.put(Media.DESCRIPTION, "Image Captured by Camera via an Intent");
-		pic = getContentResolver().insert(Media.EXTERNAL_CONTENT_URI, values);
-		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-		intent.putExtra(MediaStore.EXTRA_OUTPUT, pic);
-		startActivityForResult(intent, 0);
+        searching.setVisibility(View.INVISIBLE);
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(ImageSearchRatinMalkud.this);
+		builder.setCancelable(false);
+		builder.setTitle("Choose an image from Gallery or use the Cam to take a pic...");
+		//builder.setMessage(result);
+		builder.setInverseBackgroundForced(true);
+		builder.setPositiveButton("Camera", new DialogInterface.OnClickListener() {
+		
+			@Override
+		public void onClick(DialogInterface dialog, int id){
+				ContentValues values = new ContentValues();
+				values.put(Media.TITLE, "My demo image");
+				values.put(Media.DESCRIPTION, "Image Captured by Camera via an Intent");
+				pic = getContentResolver().insert(Media.EXTERNAL_CONTENT_URI, values);
+				Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+				intent.putExtra(MediaStore.EXTRA_OUTPUT, pic);
+				startActivityForResult(intent, 0);
+			}
+		})
+		.setNegativeButton("Gallery", new DialogInterface.OnClickListener() {
+					
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Intent galleryIntent = new Intent(Intent.ACTION_PICK);
+				galleryIntent.setType("image/*");
+				startActivityForResult(galleryIntent,1);
+				
+			
+			}
+		});
+	
+			
+		AlertDialog myAlert = builder.create();
+		myAlert.show();
 	}
 	
 	@Override
@@ -159,7 +188,8 @@ public class ImageSearchRatinMalkud extends Activity {
 	 * This YUV image is passed to the iq-engine sdk.
 	 */
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if(requestCode==0 && resultCode==Activity.RESULT_OK){
+		if( resultCode==Activity.RESULT_OK){
+			if(requestCode==0){
 			try {
 				bmp = MediaStore.Images.Media.getBitmap(this.getContentResolver(), pic);
 				startSearch();
@@ -171,6 +201,19 @@ public class ImageSearchRatinMalkud extends Activity {
 				Toast.makeText(getApplicationContext(),"I/O error, retake picture", Toast.LENGTH_LONG).show();
 				Intent restart = new Intent(this, ImageSearchRatinMalkud.class);
 				startActivity(restart);
+			}
+		  }
+			if(requestCode==1){
+				 Uri imageSelected = data.getData();
+		            InputStream imageStream = null;
+					try {
+						imageStream = getContentResolver().openInputStream(imageSelected);
+						 bmp = BitmapFactory.decodeStream(imageStream);
+				            startSearch();
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}      
 			}
 		}
 		else{
