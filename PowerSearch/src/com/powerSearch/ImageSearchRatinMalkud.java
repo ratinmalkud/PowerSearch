@@ -29,6 +29,7 @@ import android.app.SearchManager;
 import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -46,7 +47,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ImageSearchRatinMalkud extends Activity {
+public class ImageSearchRatinMalkud extends Activity implements OnCancelListener{
 	
 	Uri pic;
 	Button click;
@@ -60,7 +61,12 @@ public class ImageSearchRatinMalkud extends Activity {
 	int height;
 	int bpp = 12;
 	String result;
-	TextView searching;	
+	TextView searching;
+	
+	static final int CAMERA_REQUEST = 0;
+	static final int GALLERY_REQUEST = 1;
+	static boolean cam;
+	OnCancelListener listen;
 	/*********************************************************************************************/
 	/**
 	 * Account settings. You can obtain the required keys after you've signed up
@@ -122,6 +128,24 @@ public class ImageSearchRatinMalkud extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_image_search_ratin_malkud);
 		
+		Intent gotHereFrom = getIntent();
+		cam = gotHereFrom.getBooleanExtra("Camera", HomeScreen.cam);
+		
+		if(cam){
+			ContentValues values = new ContentValues();
+			values.put(Media.TITLE, "My demo image");
+			values.put(Media.DESCRIPTION, "Image Captured by Camera via an Intent");
+			pic = getContentResolver().insert(Media.EXTERNAL_CONTENT_URI, values);
+			Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+			intent.putExtra(MediaStore.EXTRA_OUTPUT, pic);
+			startActivityForResult(intent, CAMERA_REQUEST);
+		}
+		else{
+			Intent galleryIntent = new Intent(Intent.ACTION_PICK);
+			galleryIntent.setType("image/*");
+			startActivityForResult(galleryIntent,GALLERY_REQUEST);
+		}
+		
 		searching = (TextView)findViewById(R.id.searching);
 		searching.setVisibility(View.VISIBLE);
 		
@@ -133,46 +157,6 @@ public class ImageSearchRatinMalkud extends Activity {
 				SEARCH_OBJECT_BARCODE, onResultCallback, KEY, SECRET);
 		
 		GoogleSearchFlag=false;
-		
-		
-		/*
-		 *  Get image by launching a new activity for camera
-		 */
-        searching.setVisibility(View.INVISIBLE);
-		
-		AlertDialog.Builder builder = new AlertDialog.Builder(ImageSearchRatinMalkud.this);
-		builder.setCancelable(false);
-		builder.setTitle("Choose an image from Gallery or use the Cam to take a pic...");
-		//builder.setMessage(result);
-		builder.setInverseBackgroundForced(true);
-		builder.setPositiveButton("Camera", new DialogInterface.OnClickListener() {
-		
-			@Override
-		public void onClick(DialogInterface dialog, int id){
-				ContentValues values = new ContentValues();
-				values.put(Media.TITLE, "My demo image");
-				values.put(Media.DESCRIPTION, "Image Captured by Camera via an Intent");
-				pic = getContentResolver().insert(Media.EXTERNAL_CONTENT_URI, values);
-				Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-				intent.putExtra(MediaStore.EXTRA_OUTPUT, pic);
-				startActivityForResult(intent, 0);
-			}
-		})
-		.setNegativeButton("Gallery", new DialogInterface.OnClickListener() {
-					
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				Intent galleryIntent = new Intent(Intent.ACTION_PICK);
-				galleryIntent.setType("image/*");
-				startActivityForResult(galleryIntent,1);
-				
-			
-			}
-		});
-	
-			
-		AlertDialog myAlert = builder.create();
-		myAlert.show();
 	}
 	
 	@Override
@@ -188,8 +172,8 @@ public class ImageSearchRatinMalkud extends Activity {
 	 * This YUV image is passed to the iq-engine sdk.
 	 */
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if( resultCode==Activity.RESULT_OK){
-			if(requestCode==0){
+		if( resultCode == Activity.RESULT_OK){
+			if(requestCode == CAMERA_REQUEST){
 			try {
 				bmp = MediaStore.Images.Media.getBitmap(this.getContentResolver(), pic);
 				startSearch();
@@ -203,7 +187,7 @@ public class ImageSearchRatinMalkud extends Activity {
 				startActivity(restart);
 			}
 		  }
-			if(requestCode==1){
+			if(requestCode == GALLERY_REQUEST){
 				 Uri imageSelected = data.getData();
 		            InputStream imageStream = null;
 					try {
@@ -395,9 +379,17 @@ public class ImageSearchRatinMalkud extends Activity {
 	 */
 	public void showResult(){
 		searching.setVisibility(View.INVISIBLE);
+		String sub;
+		
+		if(cam){
+			sub = "Retake image";
+		}
+		else{
+			sub = "Return to gallery";
+		}
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(ImageSearchRatinMalkud.this);
-		builder.setCancelable(false);
+		builder.setCancelable(true);
 		builder.setTitle("Image Recognized as...");
 		builder.setMessage(result);
 		builder.setInverseBackgroundForced(true);
@@ -411,24 +403,40 @@ public class ImageSearchRatinMalkud extends Activity {
 				GoogleSearchFlag=true;
 			}
 		})
-		.setNegativeButton("Retake image", new DialogInterface.OnClickListener() {
+		.setNegativeButton(sub, new DialogInterface.OnClickListener() {
 					
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				startAgain();
 			}
-		});
+		})
+	//	.setOnCancelListener(listen);
+		;
+		
 	
-			
 		AlertDialog myAlert = builder.create();
 		myAlert.show();
 	}
-	
+/*	
+	@Override
+	public void onCancel(DialogInterface dialog) {
+		
+		Intent intent = new Intent(this, HomeScreen.class);
+		startActivity(intent);
+	}		
+	*/
 	/*
 	 * Return to home screen when the home button is clicked.
 	 */
 	public void goHome(){
 		Intent intent = new Intent(this, HomeScreen.class);
 		startActivity(intent);
+	}
+
+	@Override
+	public void onCancel(DialogInterface dialog) {
+		// TODO Auto-generated method stub
+		goHome();
+		
 	}
 }

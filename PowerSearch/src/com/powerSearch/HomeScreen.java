@@ -3,6 +3,7 @@ package com.powerSearch;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.SearchManager;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,6 +11,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.provider.MediaStore.Images.Media;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.Menu;
@@ -25,12 +28,16 @@ public class HomeScreen extends Activity {
 	LocationManager locMgr;
 	LocationListener locListener;
 	boolean gps;
+	static final int CAMERA_REQUEST = 0;
+	static final int GALLERY_REQUEST = 1;
+	static boolean cam;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home_screen);
 		gps = false;
+		cam = false;
 	}
 
 	
@@ -55,10 +62,51 @@ public class HomeScreen extends Activity {
 	 */
 	
 	public void initiateImageSearch(View view){
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(HomeScreen.this);
+		builder.setCancelable(true);
+		builder.setTitle("Image Source");
+		builder.setMessage("Please select if you want to take a new picture or use an existing image from the gallery.");
+		builder.setInverseBackgroundForced(true);
+		builder.setPositiveButton("Camera", new DialogInterface.OnClickListener() {
+		
+		@Override
+		public void onClick(DialogInterface dialog, int id){
+		//		ContentValues values = new ContentValues();
+		//		values.put(Media.TITLE, "My demo image");
+		//		values.put(Media.DESCRIPTION, "Image Captured by Camera via an Intent");
+		//		pic = getContentResolver().insert(Media.EXTERNAL_CONTENT_URI, values);
+		//		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		//		intent.putExtra(MediaStore.EXTRA_OUTPUT, pic);
+		//		startActivityForResult(intent, CAMERA_REQUEST);
+			cam = true;
+			goToImageSearch();
+			}
+		})
+
+		.setNegativeButton("Open Gallery", new DialogInterface.OnClickListener() {
+					
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+		//		Intent galleryIntent = new Intent(Intent.ACTION_PICK);
+		//		galleryIntent.setType("image/*");
+		//		startActivityForResult(galleryIntent,GALLERY_REQUEST);
+				cam = false;
+				goToImageSearch();
+			}
+		});	
+		AlertDialog myAlert = builder.create();
+		myAlert.show();
+		
+		
+		
+	}
+	
+	public void goToImageSearch(){
 		Intent intent = new Intent(this, ImageSearchRatinMalkud.class);
+		intent.putExtra("Camera", cam);
 		startActivity(intent);
 	}
-
 	/*
 	 *  Start Text Search
 	 */
@@ -76,7 +124,7 @@ public class HomeScreen extends Activity {
 	public void determineProvider(View view){
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(HomeScreen.this);
-		builder.setCancelable(false);
+		builder.setCancelable(true);
 		builder.setTitle("Select location provider");
 		builder.setMessage("Please select one of the 2 providers below.\n(GPS location takes a while if indoors)");
 		builder.setInverseBackgroundForced(true);
