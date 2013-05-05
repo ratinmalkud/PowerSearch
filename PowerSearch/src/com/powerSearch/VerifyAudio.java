@@ -10,6 +10,7 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
@@ -107,5 +108,26 @@ public class VerifyAudio extends Activity implements OnInitListener{
 	public void onInit(int arg0) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public void onPause() {
+		Log.d("-----------", "onPause");
+		super.onPause();
+	}
+	
+	@Override
+	public void onDestroy(){
+		super.onDestroy();
+	}
+	
+	@Override
+	public void onResume(){
+		super.onResume();
+	}
+	
+	@Override
+	public void onStop(){
+		super.onStop();
 	}
 }

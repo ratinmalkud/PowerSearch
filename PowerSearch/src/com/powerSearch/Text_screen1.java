@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -99,6 +100,27 @@ public class Text_screen1 extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.text_screen1, menu);
 		return true;
+	}
+	
+	@Override
+	public void onPause() {
+		Log.d("-----------", "onPause");
+		super.onPause();
+	}
+	
+	@Override
+	public void onDestroy(){
+		super.onDestroy();
+	}
+	
+	@Override
+	public void onResume(){
+		super.onResume();
+	}
+	
+	@Override
+	public void onStop(){
+		super.onStop();
 	}
 
 }

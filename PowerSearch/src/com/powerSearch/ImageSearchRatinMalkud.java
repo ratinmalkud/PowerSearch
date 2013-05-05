@@ -389,7 +389,7 @@ public class ImageSearchRatinMalkud extends Activity implements OnCancelListener
 		}
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(ImageSearchRatinMalkud.this);
-		builder.setCancelable(true);
+		builder.setCancelable(false);
 		builder.setTitle("Image Recognized as...");
 		builder.setMessage(result);
 		builder.setInverseBackgroundForced(true);
@@ -403,28 +403,28 @@ public class ImageSearchRatinMalkud extends Activity implements OnCancelListener
 				GoogleSearchFlag=true;
 			}
 		})
-		.setNegativeButton(sub, new DialogInterface.OnClickListener() {
+		.setNeutralButton(sub, new DialogInterface.OnClickListener() {
 					
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				startAgain();
 			}
 		})
-	//	.setOnCancelListener(listen);
-		;
 		
-	
+		.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				goHome();
+			}
+			
+		});
+		
 		AlertDialog myAlert = builder.create();
 		myAlert.show();
 	}
-/*	
-	@Override
-	public void onCancel(DialogInterface dialog) {
-		
-		Intent intent = new Intent(this, HomeScreen.class);
-		startActivity(intent);
-	}		
-	*/
+	
 	/*
 	 * Return to home screen when the home button is clicked.
 	 */
@@ -433,10 +433,16 @@ public class ImageSearchRatinMalkud extends Activity implements OnCancelListener
 		startActivity(intent);
 	}
 
-	@Override
-	public void onCancel(DialogInterface dialog) {
+	public void onDismiss(DialogInterface dialog) {
 		// TODO Auto-generated method stub
 		goHome();
 		
 	}
+
+	@Override
+	public void onCancel(DialogInterface dialog) {
+		// TODO Auto-generated method stub
+		goHome();
+	}
+	
 }

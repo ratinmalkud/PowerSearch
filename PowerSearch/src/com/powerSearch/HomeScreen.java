@@ -64,7 +64,7 @@ public class HomeScreen extends Activity {
 	public void initiateImageSearch(View view){
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(HomeScreen.this);
-		builder.setCancelable(true);
+		builder.setCancelable(false);
 		builder.setTitle("Image Source");
 		builder.setMessage("Please select if you want to take a new picture or use an existing image from the gallery.");
 		builder.setInverseBackgroundForced(true);
@@ -72,27 +72,25 @@ public class HomeScreen extends Activity {
 		
 		@Override
 		public void onClick(DialogInterface dialog, int id){
-		//		ContentValues values = new ContentValues();
-		//		values.put(Media.TITLE, "My demo image");
-		//		values.put(Media.DESCRIPTION, "Image Captured by Camera via an Intent");
-		//		pic = getContentResolver().insert(Media.EXTERNAL_CONTENT_URI, values);
-		//		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-		//		intent.putExtra(MediaStore.EXTRA_OUTPUT, pic);
-		//		startActivityForResult(intent, CAMERA_REQUEST);
 			cam = true;
 			goToImageSearch();
 			}
 		})
 
-		.setNegativeButton("Open Gallery", new DialogInterface.OnClickListener() {
+		.setNeutralButton("Open Gallery", new DialogInterface.OnClickListener() {
 					
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-		//		Intent galleryIntent = new Intent(Intent.ACTION_PICK);
-		//		galleryIntent.setType("image/*");
-		//		startActivityForResult(galleryIntent,GALLERY_REQUEST);
 				cam = false;
 				goToImageSearch();
+			}
+		})
+		.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				goHome();
 			}
 		});	
 		AlertDialog myAlert = builder.create();
@@ -124,7 +122,7 @@ public class HomeScreen extends Activity {
 	public void determineProvider(View view){
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(HomeScreen.this);
-		builder.setCancelable(true);
+		builder.setCancelable(false);
 		builder.setTitle("Select location provider");
 		builder.setMessage("Please select one of the 2 providers below.\n(GPS location takes a while if indoors)");
 		builder.setInverseBackgroundForced(true);
@@ -136,7 +134,7 @@ public class HomeScreen extends Activity {
 			findMe();
 		}
 		})
-		.setNegativeButton("Network Location", new DialogInterface.OnClickListener() {
+		.setNeutralButton("Network Location", new DialogInterface.OnClickListener() {
 					
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -144,6 +142,14 @@ public class HomeScreen extends Activity {
 			//	startAgain();
 				gps = false;
 				findMe();
+			}
+		})
+		.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				goHome();
 			}
 		});
 				
@@ -271,16 +277,24 @@ public class HomeScreen extends Activity {
 		startActivity(intent);
 	}
 	
+	@Override
 	public void onPause() {
 		Log.d("-----------", "onPause");
 		super.onPause();
 	}
 	
+	@Override
 	public void onDestroy(){
 		super.onDestroy();
 	}
 	
+	@Override
 	public void onResume(){
 		super.onResume();
+	}
+	
+	@Override
+	public void onStop(){
+		super.onStop();
 	}
 }
