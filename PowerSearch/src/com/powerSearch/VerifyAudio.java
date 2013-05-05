@@ -16,7 +16,8 @@ import android.view.View;
 import android.widget.Toast;
 
 public class VerifyAudio extends Activity implements OnInitListener{
-
+//	MediaPlayer player;
+//	String savedAt = "/sdcard/toSearch.3gpp";
 	String toSearch;
 	final static int CHECK_CODE = 1;
 	TextToSpeech myTTS;
@@ -28,7 +29,7 @@ public class VerifyAudio extends Activity implements OnInitListener{
 		
 		Intent intent = getIntent();
 		toSearch = intent.getStringExtra(AudioSearch.searchPhrase);
-
+	//	toSearch = AudioSearch.getToSearch();
 		
 		Intent checkIntent = new Intent();
 		checkIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
